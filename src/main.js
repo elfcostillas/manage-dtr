@@ -1,0 +1,81 @@
+import './assets/main.css'
+
+import { createApp } from 'vue'
+import { createPinia } from 'pinia'
+
+import App from './App.vue'
+import router from './router'
+
+/** Components **/
+import Navbar from './components/auth/Navbar.vue'
+
+
+/** PrimeVue CSS **/
+import 'primeicons/primeicons.css';
+
+/** PrimeVue **/
+
+import PrimeVue from 'primevue/config';
+import Aura from '@primeuix/themes/aura';
+
+import DataTable from 'primevue/datatable';
+import Column from 'primevue/column';
+
+import Menubar from 'primevue/menubar';
+import Card from 'primevue/card';
+import Select from 'primevue/select';
+import InputText from 'primevue/inputtext';
+import InputNumber from 'primevue/inputnumber';
+import ConfirmDialog from 'primevue/confirmdialog';
+import { Ripple } from 'primevue';
+import Button from 'primevue/button';
+import Listbox from 'primevue/listbox';
+import Toolbar from 'primevue/toolbar';
+import Dialog from 'primevue/dialog';
+import Toast from 'primevue/toast';
+import Image from 'primevue/image';
+import Password from 'primevue/password';
+
+/* service */
+import ToastService from 'primevue/toastservice';
+import ConfirmationService from 'primevue/confirmationservice';
+
+const app = createApp(App)
+
+app.component('Navbar',Navbar);
+
+app.use(createPinia())
+app.use(router)
+app.component('Menubar',Menubar);
+app.component('Card',Card);
+app.component('Select',Select);
+app.component('InputText',InputText);
+app.component('InputNumber',InputNumber);
+
+app.component('Listbox',Listbox);
+app.component('Toolbar',Toolbar);
+
+app.component('DataTable',DataTable);
+app.component('Column',Column);
+app.component('Button',Button);
+app.component('Dialog',Dialog);
+app.component('ConfirmDialog',ConfirmDialog);
+
+app.component('Toast',Toast);
+app.component('Image',Image);
+app.component('Password',Password);
+
+app.use(ToastService);
+app.use(ConfirmationService);
+
+
+app.directive('ripple',Ripple)
+
+app.use(PrimeVue, {
+    theme: {
+        preset: Aura
+    }
+});
+
+
+app.mount('#app')
