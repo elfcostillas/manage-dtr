@@ -6,6 +6,7 @@ import GovtLoanPage from '@/components/deductions/gov-deductions/MainPage.vue'
 
 import UnpostedPayrollRegister from '@/components/payroll-register/unposted/MainPage.vue'
 import CompensationPage from '@/components/compensation/MainPage.vue'
+import CanteenPage from '@/components/deductions/canteen/MainPage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -32,6 +33,11 @@ const router = createRouter({
       path : '/deductions/installments',
       name : 'installments',
       component : InstallmentPage
+    },
+    {
+      path : '/deductions/canteen',
+      name : 'canteen',
+      component : CanteenPage,
     },
     {
       path : '/deductions/govt-loans',

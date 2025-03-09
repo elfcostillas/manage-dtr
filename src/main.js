@@ -35,10 +35,15 @@ import Dialog from 'primevue/dialog';
 import Toast from 'primevue/toast';
 import Image from 'primevue/image';
 import Password from 'primevue/password';
+import IconField from 'primevue/iconfield';
+import InputIcon from 'primevue/inputicon';
 
 /* service */
 import ToastService from 'primevue/toastservice';
 import ConfirmationService from 'primevue/confirmationservice';
+
+import ColumnGroup from 'primevue/columngroup';   // optional
+import Row from 'primevue/row';                   // optional
 
 const app = createApp(App)
 
@@ -61,9 +66,17 @@ app.component('Button',Button);
 app.component('Dialog',Dialog);
 app.component('ConfirmDialog',ConfirmDialog);
 
+app.component('IconField',IconField);
+app.component('InputIcon',InputIcon);
+
 app.component('Toast',Toast);
 app.component('Image',Image);
 app.component('Password',Password);
+
+app.component('ColumnGroup',ColumnGroup);
+app.component('Row',Row);
+
+
 
 app.use(ToastService);
 app.use(ConfirmationService);

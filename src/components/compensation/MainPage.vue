@@ -53,8 +53,6 @@
         compensation_list.value = mainList.value;
         mainTable.value.setData(mainList.value);
 
-        console.log(mainList.value);
-
     };
 
 </script>

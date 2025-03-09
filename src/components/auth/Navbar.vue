@@ -49,6 +49,11 @@
                     icon: 'pi pi-building-columns',
                     route : '/deductions/govt-loans'
                 },
+                {
+                    label: 'Canteen',
+                    icon: 'pi pi-clipboard',
+                    route : '/deductions/canteen'
+                },
                
             ]
         },
