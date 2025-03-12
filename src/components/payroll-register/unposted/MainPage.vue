@@ -40,6 +40,9 @@
     const dataColumns = ref();
     const mainTable = ref();
 
+    const installmentColumns = ref();
+    const govLoanColumns = ref();
+
     onMounted(async () => {
         let periods = await payreg_store.getPayrollPeriods();
         period.value = periods.value;
@@ -52,11 +55,13 @@
             visible.value = true;
 
             let resp = await payreg_store.processPayroll(selectedPeriod.value);
-
+          
             dataTables.value = resp.value.table;
             dataColumns.value = resp.value.cols;
+            installmentColumns.value = resp.value.installment_cols;
+            govLoanColumns.value = resp.value.loans_cols;
 
-            mainTable.value.setData(dataTables.value,dataColumns.value);
+            mainTable.value.setData(dataTables.value,dataColumns.value,installmentColumns.value,govLoanColumns.value);
 
             
         }

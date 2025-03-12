@@ -49,10 +49,13 @@
     const fnReloadByPeriod = async (period) => {
         selectedPeriod.value = period;
 
-        let mainList = await compensation_store.compensations_by_period(selectedPeriod.value);
-        compensation_list.value = mainList.value;
-        mainTable.value.setData(mainList.value);
+        if(selectedPeriod.value != null){
+            mainTable.value.setLoading();
 
+            let mainList = await compensation_store.compensations_by_period(selectedPeriod.value);
+            compensation_list.value = mainList.value;
+            mainTable.value.setData(mainList.value);
+        }
     };
 
 </script>

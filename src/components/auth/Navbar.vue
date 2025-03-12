@@ -50,7 +50,7 @@
                     route : '/deductions/govt-loans'
                 },
                 {
-                    label: 'Canteen',
+                    label: 'C.A. / Canteen',
                     icon: 'pi pi-clipboard',
                     route : '/deductions/canteen'
                 },

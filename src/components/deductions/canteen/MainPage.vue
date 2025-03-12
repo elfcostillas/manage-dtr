@@ -43,10 +43,14 @@
 
     const fnReloadByPeriod = async (period) => {
         selectedPeriod.value = period;
+        
+        if(selectedPeriod.value != null){
+            mainTable.value.setLoading();
 
-        let mainList = await canteen_store.canteen_by_period(selectedPeriod.value);
-        canteen_list.value = mainList.value;
-        mainTable.value.setData(mainList.value);
+            let mainList = await canteen_store.canteen_by_period(selectedPeriod.value);
+            canteen_list.value = mainList.value;
+            mainTable.value.setData(mainList.value);
+        }
 
     };
 

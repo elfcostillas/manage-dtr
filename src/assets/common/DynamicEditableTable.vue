@@ -1,6 +1,6 @@
 <template>
     <DataTable v-model:editingRows="editingRows" v-model:filters="filters" editMode="row" :value="dataList" tableStyle="max-width:82rem;min-width:82rem;font-size:11pt;" dataKey="id"  
-    @row-edit-save="onRowEditSave" scrollable scrollHeight="678px"  :globalFilterFields="['lastname', 'firstname', 'remarks']">
+    @row-edit-save="onRowEditSave" scrollable scrollHeight="678px"  :globalFilterFields="['lastname', 'firstname', 'remarks']" :loading="loading">
         <template #header>
             <div class="flex justify-end">
                 <IconField>
@@ -11,6 +11,7 @@
                 </IconField>
             </div>
         </template>
+        <template #loading> Processing. Please wait. </template>
         <Column style="width:10rem;text-align:left;" field="lastname" header="Last Name" ></Column>
         <Column style="width:10rem;text-align:left;" field="firstname" header="First Name" ></Column>
         <Column style="width:8rem;text-align:right;" field="earnings" header="Earnings" >
@@ -58,6 +59,7 @@
 
     const dataList = ref();
     const columns = ref();
+    const loading = ref(true);
 
     const editingRows = ref([]);
     const compensation_store = useCompensationStore();
@@ -122,10 +124,18 @@
     const setData = async (data) => {
         dataList.value = await data;
         computeTotals();
+        loading.value = false;
+    }
+
+    const setLoading = async () => {
+        loading.value = true;
+        console.log("called");
     }
 
     defineExpose({
-        setData
+        setData,
+        setLoading
+
     });
 </script>
 

@@ -1,6 +1,6 @@
 <template>
     <DataTable v-model:editingRows="editingRows" v-model:filters="filters" editMode="row" :value="dataList" tableStyle="max-width:82rem;min-width:82rem;font-size:11pt;" dataKey="id"  
-    @row-edit-save="onRowEditSave" scrollable scrollHeight="678px"  :globalFilterFields="['lastname', 'firstname', 'remarks2']">
+    @row-edit-save="onRowEditSave" scrollable scrollHeight="678px"  :globalFilterFields="['lastname', 'firstname', 'remarks2']" :loading="loading" >
         <template #header>
             <div class="flex justify-end">
                 <IconField>
@@ -11,8 +11,17 @@
                 </IconField>
             </div>
         </template>
+        <template #loading> Processing. Please wait. </template>
         <Column style="width:10rem;text-align:left;" field="lastname" header="Last Name" ></Column>
         <Column style="width:10rem;text-align:left;" field="firstname" header="First Name" ></Column>
+        <Column style="width:8rem;text-align:right;" field="deductions" header="Cash Advance" >
+            <template #body="{ data }">
+                {{   Number(data.deductions).toLocaleString("en-US", {maximumFractionDigits:2,minimumFractionDigits:2})  }}
+            </template>
+            <template #editor="{ data, field }">
+                <InputText v-model="data[field]" fluid />
+            </template>
+        </Column>
         <Column style="width:8rem;text-align:right;" field="canteen_bpn" header="BPN" >
             <template #body="{ data }">
                 {{   Number(data.canteen_bpn).toLocaleString("en-US", {maximumFractionDigits:2,minimumFractionDigits:2})  }}
@@ -68,6 +77,7 @@
     const dataList = ref();
     const canteen_store = useCanteenDeduction();
     const editingRows = ref([]);
+    const loading = ref(true);
 
     const filters = ref({
         global: { value: null, matchMode: FilterMatchMode.CONTAINS },
@@ -118,10 +128,16 @@
     const setData = async (data) => {
         dataList.value = await data;
         computeTotals();
+        loading.value = false;
+    }
+
+    const setLoading = async () => {
+        loading.value = true;
     }
 
     defineExpose({
-        setData
+        setData,
+        setLoading
     });
 
 
