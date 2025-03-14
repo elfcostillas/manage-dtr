@@ -1,6 +1,6 @@
 <template>
     <div class="card">
-        <div v-if="visible">
+        <div v-if="authStore.isLoggedIn">
             <Menubar :model="items" style="margin:4px;" >
                 <template #item="{ item, props, hasSubmenu }">
                     <router-link v-if="item.route" v-slot="{ href, navigate }" :to="item.route" custom>
@@ -22,6 +22,8 @@
 
 <script setup>
     import { ref } from "vue";
+    import { useAuthStore } from "@/stores/auth";
+    const authStore = await useAuthStore();
 
     const visible = ref(true);
 

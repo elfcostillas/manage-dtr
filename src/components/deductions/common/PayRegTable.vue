@@ -1,5 +1,11 @@
 <template>
-    <DataTable v-model:selection="selectedRow" :value="datatable" tableStyle="font-size:11pt;" scrollable scrollHeight="76vh" selectionMode="multiple" :loading="loading">
+     <Toolbar>
+        <template #start>
+            <Button icon="pi pi-file-excel" @click="downloadExcel" class="mr-2" severity="success" label="Excel" /> 
+            <Button icon="pi pi-file-pdf" @click="downloadExcel" class="mr-2" severity="danger" label="PDF" /> 
+        </template>
+    </Toolbar>
+    <DataTable v-model:selection="selectedRow" :value="datatable" tableStyle="font-size:11pt;" scrollable scrollHeight="65vh" selectionMode="multiple" :loading="loading">
         <template #loading> Processing. Please wait. </template>
         
         <Column field="dept_name" header="Department" frozen headerStyle="text-align:center;font-size:11pt;color:black;" bodyStyle="font-size:9pt;text-align:left;" style="min-width:10rem;">
