@@ -1,0 +1,1 @@
+export const base_url = 'http://172.17.56.65/support-group-api';

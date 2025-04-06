@@ -5,8 +5,8 @@ axios.defaults.withXSRFToken = true;
 
 const api  = axios.create({
    
+    // baseURL : 'http://172.17.56.65/support-group-api/'
     baseURL : 'http://172.17.56.65/support-group-api/'
-    // baseURL : 'http://172.31.76.43/sg_api/'
     
 });
 

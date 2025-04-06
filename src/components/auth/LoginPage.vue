@@ -43,6 +43,7 @@
     import { ref } from "vue";
     import { useAuthStore } from  "@/stores/auth.js"
     import { useToast } from "primevue/usetoast";
+    import { popToast } from "@/assets/composables/showToast";
     const toast = useToast();
     const router = useRouter();
 
@@ -62,7 +63,7 @@
         responseStatus.value = s;
 
         if(store.isLoggedIn){
-            router.push({ name : 'home' });
+            router.push({ name : 'dashboard' });
         }else{
             const toastObj = await popToast(responseData,responseStatus);
             toast.add(toastObj);

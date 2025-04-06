@@ -13,7 +13,7 @@ export const useAuthStore = defineStore("authStore", ()=>{
     const s = ref();
 
     const isLoggedIn = computed(()=> !!user.value);
-    // const isLoggedIn = computed(()=> false );
+    // const isLoggedIn = computed(()=> true );
  
     const handleLogin = async (credentials) => {
       

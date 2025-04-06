@@ -7,6 +7,7 @@ import GovtLoanPage from '@/components/deductions/gov-deductions/MainPage.vue'
 import UnpostedPayrollRegister from '@/components/payroll-register/unposted/MainPage.vue'
 import CompensationPage from '@/components/compensation/MainPage.vue'
 import CanteenPage from '@/components/deductions/canteen/MainPage.vue'
+import PostedMainPage from '@/components/payroll-register/posted/MainPage.vue'
 import { useAuthStore } from '@/stores/auth'
 
 
@@ -18,7 +19,7 @@ const router = createRouter({
       name: 'home',
       component: HomeView,
       meta : {
-        auth : false,
+        auth : true,
       }
     },
     {
@@ -70,44 +71,40 @@ const router = createRouter({
       name : 'other-earnings',
       component : CompensationPage
     },
+    {
+      path : '/payroll-regitser/posted',
+      name : 'posted',
+      component : PostedMainPage
+    }
   ],
 });
 
 
 
-router.beforeEach(async (to,from) => {
-  const authStore = await useAuthStore();
+router.beforeEach(async(to,from) => {
+  const authStore = useAuthStore();
+  await authStore.fetchUser();
 
-  console.log(to.meta.auth,authStore.isLoggedIn,to);
+  // console.log(to.meta.auth,authStore.isLoggedIn,to);
+  // console.log('before anything else ',to.meta.auth, !authStore.isLoggedIn );
 
+  // console.log(to.fullPath == 'login');
 
-  if(to.meta.auth && !authStore.isLoggedIn ){
+  console.log(authStore.isLoggedIn , to.fullPath);
+
+  if(authStore.isLoggedIn == true && to.fullPath == '/login')
+  {
+    console.log('case 1');
+    return { name : 'dashboard' };
    
-      // return {
-      //     name : 'login',
-      //     // query : {
-      //     //   redirect : '/login'
-      //     // }
-      // };
-      return {
-          name : 'login'
-      };
-  } else if (authStore.isLoggedIn && authStore.isLoggedIn && to.fullPath=='/' ){
-
-    console.log('go to home.');
-    // return {
-    //     name : 'home'
-    // };
-    // next({name : 'dashboard'})
-        return {
-          name : 'dashboard'
-      };
-  } else {
-    console.log('else');
-    console.log(authStore.isLoggedIn,to.fullPath);
-    // next();
   }
 
+  if(authStore.isLoggedIn == false && to.fullPath != '/login')
+  {
+    console.log('case 2');
+    return { name : 'login' };
+    
+  }
  
 });
 

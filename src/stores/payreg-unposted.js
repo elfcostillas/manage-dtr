@@ -1,11 +1,15 @@
 
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
-import { getFN } from '@/assets/composables/transmit'
+import { getFN,postFN } from '@/assets/composables/transmit'
 
 export const usePayRegUnposted = defineStore('unposted', () => {
     const payreg_data = ref();
     const period_list = ref();
+
+    const respData = ref();
+    const respMessage = ref();
+    const respStat = ref();
 
     const getPayrollPeriods = async () => {
         
@@ -19,6 +23,13 @@ export const usePayRegUnposted = defineStore('unposted', () => {
         return period_list;
     }
 
+    const postPayroll = async (period_id) => {
+        const { data,message,status } = await postFN(`api/payroll-register/unposted/post`,{ period_id : period_id });
+        setResp(data,message,status);   
+        
+        return { resp: respData.value,message: respMessage.value,status: respStat.value };
+    };
+
     const processPayroll = async (id) => {
         
         try{
@@ -29,11 +40,19 @@ export const usePayRegUnposted = defineStore('unposted', () => {
         }
 
         return payreg_data;
+
     }
+
+    const setResp = (data,message,stat) => {
+        respData.value = data;
+        respMessage.value = message;
+        respStat.value = stat;
+    };
 
     return { 
         getPayrollPeriods,
-        processPayroll
+        processPayroll,
+        postPayroll
     }
 
 

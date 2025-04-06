@@ -61,13 +61,17 @@
             installmentColumns.value = resp.value.installment_cols;
             govLoanColumns.value = resp.value.loans_cols;
 
-            mainTable.value.setData(dataTables.value,dataColumns.value,installmentColumns.value,govLoanColumns.value);
+            mainTable.value.setData(selectedPeriod.value,dataTables.value,dataColumns.value,installmentColumns.value,govLoanColumns.value);
 
             
         }
         
 
         
+    };
+
+    const view = async () => {
+    
     };
 
 </script>
