@@ -69,42 +69,17 @@ const router = createRouter({
       component : DTRMainPage
     },
 
-     {
-      path : '/timekeeping/manage-dtr-confi',
-      name : 'manage-dtr',
-      component : DTRMainPage
-    },
-
-     {
-      path : '/timekeeping/manage-dtr-supportgroup',
-      name : 'manage-dtr',
-      component : DTRMainPage
-    },
     // {
-    //   path : '/deductions/canteen',
-    //   name : 'canteen',
-    //   component : CanteenPage,
+    //   path : '/timekeeping/manage-dtr-confi',
+    //   name : 'manage-dtr',
+    //   component : DTRMainPage
     // },
     // {
-    //   path : '/deductions/govt-loans',
-    //   name : 'govt-loans',
-    //   component : GovtLoanPage
+    //   path : '/timekeeping/manage-dtr-supportgroup',
+    //   name : 'manage-dtr',
+    //   component : DTRMainPage
     // },
-    // {
-    //   path : '/payroll-regitser/unposted',
-    //   name : 'unposted',
-    //   component : UnpostedPayrollRegister
-    // },
-    // {
-    //   path : '/compnesation/other-earnings',
-    //   name : 'other-earnings',
-    //   component : CompensationPage
-    // },
-    // {
-    //   path : '/payroll-regitser/posted',
-    //   name : 'posted',
-    //   component : PostedMainPage
-    // }
+  
   ],
 });
 

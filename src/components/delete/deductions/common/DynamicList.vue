@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Listbox listStyle="min-height:48rem;max-height:48rem;"  v-model="selected" :options="data_list" filter optionLabel="label" optionValue="id"  @click="filterBySelected" />
+        <Listbox listStyle="min-height:46rem;max-height:46rem;" ref="payperiodList"  v-model="selected" :options="data_list" filter optionLabel="label" optionValue="id"  @click="filterBySelected" />
     </div>
 </template>
 
