@@ -1,13 +1,20 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import LoginPage from '@/components/auth/LoginPage.vue'
-import InstallmentPage from '@/components/deductions/installments/MainPage.vue'
-import GovtLoanPage from '@/components/deductions/gov-deductions/MainPage.vue'
 
-import UnpostedPayrollRegister from '@/components/payroll-register/unposted/MainPage.vue'
-import CompensationPage from '@/components/compensation/MainPage.vue'
-import CanteenPage from '@/components/deductions/canteen/MainPage.vue'
-import PostedMainPage from '@/components/payroll-register/posted/MainPage.vue'
+import FTPMainPage from '@/components/timekeeping/ftp/MainPage.vue'
+import DTRMainPage from '@/components/timekeeping/manage-dtr/MainPage.vue'
+import FTPApprovalMainPage from '@/components/timekeeping/ftp-approval/MainPage.vue'
+
+
+// import InstallmentPage from '@/components/deductions/installments/MainPage.vue'
+// import GovtLoanPage from '@/components/deductions/gov-deductions/MainPage.vue'
+
+// import UnpostedPayrollRegister from '@/components/payroll-register/unposted/MainPage.vue'
+// import CompensationPage from '@/components/compensation/MainPage.vue'
+// import CanteenPage from '@/components/deductions/canteen/MainPage.vue'
+// import PostedMainPage from '@/components/payroll-register/posted/MainPage.vue'
+
 import { useAuthStore } from '@/stores/auth'
 
 
@@ -47,35 +54,57 @@ const router = createRouter({
       }
     },
     {
-      path : '/deductions/installments',
-      name : 'installments',
-      component : InstallmentPage
+      path : '/timekeeping/ftp',
+      name : 'ftp',
+      component : FTPMainPage
     },
     {
-      path : '/deductions/canteen',
-      name : 'canteen',
-      component : CanteenPage,
+      path : '/timekeeping/ftp-approval',
+      name : 'ftp-approval',
+      component : FTPApprovalMainPage
     },
     {
-      path : '/deductions/govt-loans',
-      name : 'govt-loans',
-      component : GovtLoanPage
+      path : '/timekeeping/manage-dtr',
+      name : 'manage-dtr',
+      component : DTRMainPage
     },
-    {
-      path : '/payroll-regitser/unposted',
-      name : 'unposted',
-      component : UnpostedPayrollRegister
+
+     {
+      path : '/timekeeping/manage-dtr-confi',
+      name : 'manage-dtr',
+      component : DTRMainPage
     },
-    {
-      path : '/compnesation/other-earnings',
-      name : 'other-earnings',
-      component : CompensationPage
+
+     {
+      path : '/timekeeping/manage-dtr-supportgroup',
+      name : 'manage-dtr',
+      component : DTRMainPage
     },
-    {
-      path : '/payroll-regitser/posted',
-      name : 'posted',
-      component : PostedMainPage
-    }
+    // {
+    //   path : '/deductions/canteen',
+    //   name : 'canteen',
+    //   component : CanteenPage,
+    // },
+    // {
+    //   path : '/deductions/govt-loans',
+    //   name : 'govt-loans',
+    //   component : GovtLoanPage
+    // },
+    // {
+    //   path : '/payroll-regitser/unposted',
+    //   name : 'unposted',
+    //   component : UnpostedPayrollRegister
+    // },
+    // {
+    //   path : '/compnesation/other-earnings',
+    //   name : 'other-earnings',
+    //   component : CompensationPage
+    // },
+    // {
+    //   path : '/payroll-regitser/posted',
+    //   name : 'posted',
+    //   component : PostedMainPage
+    // }
   ],
 });
 

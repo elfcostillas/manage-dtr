@@ -97,65 +97,27 @@
         //     icon: 'pi pi-star'
         // },
         {
-            label: 'Deductions',
-            icon: 'pi pi-receipt',
+            label: 'Timekeeping',
+            icon: 'pi pi-clock',
             items: [
                 {
-                    label: 'Installments',
-                    icon: 'pi pi-wallet',
-                    route : '/deductions/installments'
-                },
-                {
-                    label: 'Government Loans',
-                    icon: 'pi pi-building-columns',
-                    route : '/deductions/govt-loans'
-                },
-                {
-                    label: 'C.A. / Canteen',
-                    icon: 'pi pi-clipboard',
-                    route : '/deductions/canteen'
-                },
-               
-            ]
-        },
-        {
-            label: 'Other Earnings',
-            icon: 'pi pi-money-bill',
-            items: [
-                {
-                    label: 'Retro Pay / Other Income',
-                    icon: 'pi pi-wallet',
-                    route : '/compnesation/other-earnings'
-                },
-            ]
-        },
-        {
-            label: 'Payroll Transactions',
-            icon: 'pi pi-print',
-            items: [
-                {
-                    label: 'Process Payroll',
-                    icon: 'pi pi-wallet',
-                    route : '/payroll-regitser/unposted'
-                },
-                {
-                    label: 'Bank Transmittal',
+                    label: 'FTP Request',
                     icon: 'pi pi-receipt',
-                    route : '/deductions/installments'
+                    route : '/timekeeping/ftp'
                 },
                 {
-                    label: 'Posted Payroll',
-                    icon: 'pi pi-clipboard',
-                    route : '/payroll-regitser/posted'
+                    label: 'FTP Approval',
+                    icon: 'pi pi-receipt',
+                    route : '/timekeeping/ftp-approval'
                 },
-                // {
-                //     label: 'Govt. Deductions',
-                //     icon: 'pi pi-building-columns',
-                //     route : 'deductions/govt-deductions'
-                // },
-               
+                {
+                    label: 'Manage DTR',
+                    icon: 'pi pi-calendar-clock',
+                    route : '/timekeeping/manage-dtr'
+                },
             ]
-        }
+        },
+
     ]);
 
 </script>

@@ -6,7 +6,8 @@
 @import "tailwindcss-primeui"; */
 
 body {
-    background-color: #f8f9fa;
+    /* background-color: #f8f9fa; */
+    background-color: #E5E4E2;
     padding : 4px 12px;
     font-size : 11pt;
 }

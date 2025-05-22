@@ -38,6 +38,14 @@ import Password from 'primevue/password';
 import IconField from 'primevue/iconfield';
 import InputIcon from 'primevue/inputicon';
 
+import Tabs from 'primevue/tabs';
+import TabList from 'primevue/tablist';
+import Tab from 'primevue/tab';
+import TabPanels from 'primevue/tabpanels';
+import TabPanel from 'primevue/tabpanel';
+import Fieldset from 'primevue/fieldset';
+import DatePicker from 'primevue/datepicker';
+
 /* service */
 import ToastService from 'primevue/toastservice';
 import ConfirmationService from 'primevue/confirmationservice';
@@ -75,8 +83,15 @@ app.component('Password',Password);
 
 app.component('ColumnGroup',ColumnGroup);
 app.component('Row',Row);
+app.component('Fieldset',Fieldset);
 
+app.component('Tabs',Tabs);
 
+app.component('TabList',TabList);
+app.component('Tab',Tab);
+app.component('TabPanels',TabPanels);
+app.component('TabPanel',TabPanel);
+app.component('DatePicker',DatePicker);
 
 app.use(ToastService);
 app.use(ConfirmationService);
