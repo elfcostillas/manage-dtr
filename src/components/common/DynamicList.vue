@@ -5,7 +5,7 @@
                 Payroll Period
             </template>
             <template #content>
-                <Listbox @change="triggerChange" v-model="selected" :highlightOnSelect="true" listStyle="min-height:45rem;max-height:45rem;width:14rem" :options="data_list" optionLabel="label" optionValue="id"  @click="filterBySelected" />
+                <Listbox @change="triggerChange" v-model="selected" :highlightOnSelect="true" listStyle="min-height:45rem;max-height:45rem;width:14rem" :options="data_list" optionLabel="label" optionValue="id"  />
             </template>
         </Card>
     </div>
@@ -23,14 +23,10 @@
     });
 
     const triggerChange = () => {
-        console.log(selected.value)
+         emit('listSelected', selected.value )
     };
 
-    const emit =  defineEmits(['filter']);
-
-    const filterBySelected = () => {
-        emit('filter', selected.value )
-    };
+    const emit =  defineEmits(['listSelected']);
     
     const setData = (data) => {
         data_list.value = data;

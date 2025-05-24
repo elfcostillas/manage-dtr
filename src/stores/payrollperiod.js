@@ -17,8 +17,8 @@ export const usePayrollPeriodStore = defineStore("payrollPeriodStore", () => {
         return list;
     };
 
-     return {
-        getList,
+    return {
+        getList
        
     };
 });

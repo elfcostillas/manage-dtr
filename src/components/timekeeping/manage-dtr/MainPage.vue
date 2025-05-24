@@ -1,13 +1,13 @@
 <template>
      <div class="flex gap-2 justify-center">
         <div class="flex-none">
-            <DynamicList ref="payperiodList" ></DynamicList>
+            <DynamicList ref="payperiodList" @listSelected="setSelectedPeriod" ></DynamicList>
         </div>
         <div class="flex-none">
-            <EmployeeList @inactive="setInActive" @active="setActive" @employeeSelected="viewEmployeeDTR" ref="empList" ></EmployeeList>
+            <EmployeeList @inactive="setInActive" @active="setActive" @employeeSelected="setSelectedEmployee" ref="empList" ></EmployeeList>
         </div>
         <div class="flex-none">
-            <TablePage></TablePage>
+            <TablePage ref="dtrTable" ></TablePage>
         </div>
     </div>
 </template>
@@ -19,6 +19,7 @@
     import DynamicList from '@/components/common/DynamicList.vue';
     import { usePayrollPeriodStore } from '@/stores/payrollperiod';
     import TablePage from './TablePage.vue';
+    import { useManageDTRStore } from '@/stores/manage-dtr';
 
     const payrollperiod_store = usePayrollPeriodStore();
 
@@ -27,6 +28,15 @@
     const activeTab = ref(); 
     const employee_store = useEmployeeStore();
     const payperiodList = ref();
+
+    const dtr_store = useManageDTRStore();
+
+    const active_employees = ref();
+    const inactive_employees = ref();
+
+    const selectedPeriod = ref();
+    const selectedEmployee = ref();
+    const dtrTable = ref();
 
     onMounted(async() => {
         let periods = await payrollperiod_store.getList();
@@ -51,8 +61,24 @@
         activeTab.value = active_employees.value;
     };
 
-    const viewEmployeeDTR = () => {
+    const viewEmployeeDTR = async () => {
+        // console.log(selectedPeriod.value,selectedEmployee.value);
+        let data = await dtr_store.getDTRData(selectedPeriod.value,selectedEmployee.value);
 
+    };
+
+    const setSelectedPeriod = (period_id) => {
+        selectedPeriod.value = period_id;
+        if(selectedPeriod.value != null && selectedEmployee.value!= null){
+            viewEmployeeDTR();
+        }
+    };
+
+    const setSelectedEmployee = (emp_id) => {
+        selectedEmployee.value = emp_id;
+        if(selectedPeriod.value != null && selectedEmployee.value!= null){
+            viewEmployeeDTR();
+        }
     };
 
 </script>
