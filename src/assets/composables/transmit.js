@@ -47,7 +47,8 @@ export const getFN = async (url, params) => {
 
 export const window_open = (url) => {
   // window.open('http://172.17.42.108/ts-report-api/' + url, '_blank')
-  window.open('http://172.17.56.65/sap_api/' + url, '_blank')
+  // window.open('http://172.17.56.65/sap_api/' + url, '_blank')
+  window.open('http://localhost/sap_api/' + url, '_blank')
 }
 
 // api.post(url,$params);

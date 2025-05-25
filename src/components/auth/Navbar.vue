@@ -115,6 +115,17 @@
                     icon: 'pi pi-calendar-clock',
                     route : '/timekeeping/manage-dtr'
                 },
+                {
+                    label: 'Payroll Periods',
+                    icon: 'pi pi-calendar-plus',
+                    items : [
+                        {
+                            label: 'Semi Monthly',
+                            icon: 'pi pi-calendar-plus',
+                            route : '/timekeeping/payroll-period/semi'
+                        }
+                    ]
+                }
             ]
         },
 

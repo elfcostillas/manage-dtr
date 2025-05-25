@@ -65,6 +65,10 @@
         // console.log(selectedPeriod.value,selectedEmployee.value);
         let data = await dtr_store.getDTRData(selectedPeriod.value,selectedEmployee.value);
 
+        dtrTable.value.setData(data);
+
+        // console.log(data.value);
+
     };
 
     const setSelectedPeriod = (period_id) => {
