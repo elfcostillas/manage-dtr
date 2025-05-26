@@ -45,6 +45,7 @@ import TabPanels from 'primevue/tabpanels';
 import TabPanel from 'primevue/tabpanel';
 import Fieldset from 'primevue/fieldset';
 import DatePicker from 'primevue/datepicker';
+import Drawer from 'primevue/drawer';
 
 /* service */
 import ToastService from 'primevue/toastservice';
@@ -84,6 +85,7 @@ app.component('Password',Password);
 app.component('ColumnGroup',ColumnGroup);
 app.component('Row',Row);
 app.component('Fieldset',Fieldset);
+app.component('Drawer',Drawer);
 
 app.component('Tabs',Tabs);
 

@@ -2,14 +2,15 @@
      <Toolbar>
         <template #start>
             <Button icon="pi pi-calculator" @click="computeLogs" class="mr-2" severity="secondary" label="Compute" /> 
-            <Button icon="pi pi-list" @click="computeLogs" class="mr-2" severity="secondary" label="Show Logs" /> 
+            <Button icon="pi pi-list" @click="showLogs" class="mr-2" severity="secondary" label="Show Logs" /> 
             <Button icon="pi pi-download" @click="computeLogs" class="mr-2" severity="secondary" label="Draw Logs" /> 
         </template>
         <template #center ></template>
         <template #end ></template>
     </Toolbar>
-    <DataTable :value="dataTable" scrollable scrollHeight ="36rem" style="font-size: 10pt;">
+    <DataTable :value="dataTable" scrollable scrollHeight ="36rem" style="font-size: 10pt;" :loading="loading">
         <template #loading> Processing. Please wait. </template>
+        <template #empty > <div style="text-align: center;">  No records found. </div> </template>
         <Column field="" header="Week Day">
             <template #body="slotProps">
                 <div style="text-align:center;">
@@ -31,7 +32,7 @@
                Time In <br> (Over Time)
             </template>
         </Column>
-       <Column field="" header="" headerStyle="font-weight:500;text-align:center;">
+        <Column field="" header="" headerStyle="font-weight:500;text-align:center;">
             <template #header>
                 Time Out <br> (Over Time)
             </template>
@@ -52,6 +53,7 @@
         </Column>
 
     </DataTable>
+    
 </template>
 
 <script setup>
@@ -62,16 +64,18 @@
 
     };
 
+    const emit =  defineEmits(['showLogs']);
+
     const drawLogs = () => {
 
     };
 
     const showLogs = () => {
-
+        emit('showLogs')
     };
 
     const dataTable = ref();
-    const loading = ref(true);
+    const loading = ref(false);
 
     onMounted(async() => {
         
@@ -79,10 +83,17 @@
 
     const setData = (data) => {
         dataTable.value = data;
+        loading.value = false;
     };
 
+    const setLoadingState = (val) => {
+        loading.value = val;
+    };
+
+
     defineExpose({  
-        setData
+        setData,
+        setLoadingState
     });
 </script>
 

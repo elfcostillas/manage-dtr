@@ -12,7 +12,7 @@
                     <Tab value="5" >Double Legal Holiday</Tab>
                 </TabList>
                 <TabPanels>
-                    <TabPanel value="0"><RegularDay ref="refRegularDay"></RegularDay></TabPanel>
+                    <TabPanel value="0"><RegularDay ref="refRegularDay" @showLogs="showLogs"></RegularDay></TabPanel>
                     <TabPanel value="1"><Restday ref="refRestDay"></Restday></TabPanel>
                     <TabPanel value="2"><SpecialHoliday ref="refSpecialHoliday"></SpecialHoliday></TabPanel>
                     <TabPanel value="3"><LegalHoliday ref="refLegalHoliday"></LegalHoliday></TabPanel>
@@ -22,11 +22,22 @@
             </Tabs>
         </template>
     </Card>
+    <Drawer v-model:visible="visibleRight" ref="refRawLogs" position="right" header="Raw Logs">
+        <DataTable :value="rawLogs" scrollable scrollHeight="50rem" >
+            <Column style="font-size: 9pt;" header="Date" field="punch_date" >
+               <template  #body="slotProps">
+                    {{ (slotProps.data.punch_date) ? format(slotProps.data.punch_date,"MM/dd/yyyy") : '' }}
+               </template>
+            </Column>
+            <Column style="font-size: 9pt;" header="Clock In" field="punch_time" ></Column>
+            <Column style="font-size: 9pt;" header="State" field="cstate" ></Column>
+        </DataTable>
+    </Drawer>
 </template>
 
 <script setup>
     import { ref,onMounted } from 'vue';
-
+    import { format } from 'date-fns';
     import RegularDay from './RegularDay.vue';
     import Restday from './Restday.vue';
     import SpecialHoliday from './SpecialHoliday.vue';
@@ -34,6 +45,7 @@
     import DoubleSpecialHoliday from './DoubleSpecialHoliday.vue';
     import DoubleLegalHoliday from './DoubleLegalHoliday.vue';
 
+    const visibleRight = ref(false);
     const dtrData = ref();
 
     const refRegularDay = ref();
@@ -43,18 +55,27 @@
     const refDblSpecialHoliday = ref();
     const refDblLegalHoliday = ref();
 
+    const rawLogs = ref();
+
+    const showLogs = () => {
+        visibleRight.value = true;
+    };
+    
+
     onMounted(async () => {
         // refRegularDay.value.setData();
         // console.log(dtrData.value);
     });
 
-    const setData = (data) => {
+    const setData = async (data) => {
         dtrData.value = data;
-        // console.log(data.value.regular);
+        
+        refRegularDay.value.setLoadingState(true);
+        await refRegularDay.value.setData(data.value.regular);
+        refRegularDay.value.setLoadingState(false);
 
-        refRegularDay.value.setData(data.value.regular);
+        rawLogs.value = data.value.raw_logs;
 
-      
     };
 
     defineExpose({
