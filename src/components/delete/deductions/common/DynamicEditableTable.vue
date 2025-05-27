@@ -93,7 +93,7 @@
         if(respObj.status == 'success'){
             toast.add({ severity: 'success', summary: 'Success', detail: 'Saved successfully.', life: 3000 });
         }else{
-            toast.add({ severity: 'error', summary: 'Success', detail: 'Saved successfully.', life: 3000 });
+            toast.add({ severity: 'error', summary: 'Error', detail: 'Some errors occured.', life: 3000 });
         }
     };
 

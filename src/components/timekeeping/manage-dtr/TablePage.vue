@@ -22,7 +22,7 @@
             </Tabs>
         </template>
     </Card>
-    <Drawer v-model:visible="visibleRight" ref="refRawLogs" position="right" header="Raw Logs">
+    <Drawer v-model:visible="visibleRight" ref="refRawLogs" position="right" header="Raw Logs" style="width:22rem">
         <DataTable :value="rawLogs" scrollable scrollHeight="50rem" >
             <Column style="font-size: 9pt;" header="Date" field="punch_date" >
                <template  #body="slotProps">

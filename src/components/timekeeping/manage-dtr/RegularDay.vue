@@ -3,7 +3,7 @@
         <template #start>
             <Button icon="pi pi-calculator" @click="computeLogs" class="mr-2" severity="secondary" label="Compute" /> 
             <Button icon="pi pi-list" @click="showLogs" class="mr-2" severity="secondary" label="Show Logs" /> 
-            <Button icon="pi pi-download" @click="computeLogs" class="mr-2" severity="secondary" label="Draw Logs" /> 
+            <Button icon="pi pi-download" @click="drawLogs" class="mr-2" severity="secondary" label="Draw Logs" /> 
         </template>
         <template #center ></template>
         <template #end ></template>
@@ -53,21 +53,34 @@
         </Column>
 
     </DataTable>
-    
+    <Toast></Toast>
 </template>
 
 <script setup>
     import { ref,onMounted } from 'vue';
     import { format } from 'date-fns';
+    import { useManageDTRStore } from '@/stores/manage-dtr';
+    import { useToast } from 'primevue/usetoast';
 
+    const toast = useToast();
+    const dtr_store = useManageDTRStore();
+
+    const props = defineProps(['data']);
+    
     const computeLogs = () => {
 
     };
 
     const emit =  defineEmits(['showLogs']);
 
-    const drawLogs = () => {
+    const drawLogs = async () => {
+        console.log(dtr_store.selectedEmployee,dtr_store.selectedPeriod);
 
+        if(dtr_store.selectedEmployee,dtr_store.selectedPeriod){    
+            await dtr_store.drawLogs();
+        }else{
+            toast.add({ severity: 'error', summary: 'Error', detail: 'Please select a period and an employee.', life: 3000 });
+        }
     };
 
     const showLogs = () => {
