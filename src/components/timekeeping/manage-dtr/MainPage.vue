@@ -7,7 +7,7 @@
             <EmployeeList @inactive="setInActive" @active="setActive" @employeeSelected="setSelectedEmployee" ref="empList" ></EmployeeList>
         </div>
         <div class="flex-none">
-            <TablePage ref="dtrTable" ></TablePage>
+            <TablePage ref="dtrTable" @reloadLogs="reloadLogs" ></TablePage>
         </div>
     </div>
 </template>
@@ -61,13 +61,19 @@
         activeTab.value = active_employees.value;
     };
 
+    const reloadLogs = () => {
+       
+        viewEmployeeDTR();
+    };
+
     const viewEmployeeDTR = async () => {
-        // console.log(selectedPeriod.value,selectedEmployee.value);
+        dtrTable.value.setLoadingState(true);
+       
         let data = await dtr_store.getDTRData(selectedPeriod.value,selectedEmployee.value);
         dtr_store.setSelectedEmpAndPeriod(selectedPeriod.value,selectedEmployee.value);
         dtrTable.value.setData(data);
 
-        // console.log(data.value);
+        dtrTable.value.setLoadingState(false);
 
     };
 

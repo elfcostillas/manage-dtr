@@ -5,8 +5,8 @@ import { getFN,postFN } from "@/assets/composables/transmit";
 export const useManageDTRStore = defineStore("manageDTRStore", () => {
     
     const dtr_data = ref(null);
-    const selectedEmployee = ref();
-    const selectedPeriod = ref();
+    const selectedEmployee = ref(null);
+    const selectedPeriod = ref(null);
 
     const setSelectedEmpAndPeriod = (period_id,emp_id) => {
         selectedEmployee.value = emp_id;
@@ -25,8 +25,30 @@ export const useManageDTRStore = defineStore("manageDTRStore", () => {
     };
 
     const drawLogs = async () => {
+        let arrayData = {
+            period_id : selectedPeriod.value,
+            emp_id : selectedEmployee.value
+        };
+
         try{
-            const { data } = await getFN(`api/timekeeping/manage-dtr-semi/draw-logs/${selectedPeriod.value}/${selectedEmployee.value}`,null);
+            //const { data } = await postFN(`api/timekeeping/manage-dtr-semi/draw-logs/${selectedPeriod.value}/${selectedEmployee.value}`,null);
+            const { data } = await postFN(`api/timekeeping/manage-dtr-semi/draw-logs`,arrayData);
+            dtr_data.value = data;
+        }catch(error){
+
+        }
+
+        return dtr_data;
+    };
+
+    const computeLogs = async () => {
+        let arrayData = {
+            period_id : selectedPeriod.value,
+            emp_id : selectedEmployee.value
+        };
+
+        try{
+            const { data } = await getFN(`api/timekeeping/manage-dtr-semi/compute-logs/${selectedPeriod.value}/${selectedEmployee.value}`,null);
             dtr_data.value = data;
         }catch(error){
 
@@ -40,6 +62,7 @@ export const useManageDTRStore = defineStore("manageDTRStore", () => {
         setSelectedEmpAndPeriod,
         selectedEmployee,
         selectedPeriod,
-        drawLogs
+        drawLogs,
+        computeLogs
     };
 });

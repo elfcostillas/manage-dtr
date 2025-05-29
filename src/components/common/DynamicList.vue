@@ -5,7 +5,7 @@
                 Payroll Period
             </template>
             <template #content>
-                <Listbox @change="triggerChange" v-model="selected" :highlightOnSelect="true" listStyle="min-height:45rem;max-height:45rem;width:13rem" :options="data_list" optionLabel="label" optionValue="id"  />
+                <Listbox @change="triggerChange" v-model="selected" :highlightOnSelect="true" listStyle="min-height:45rem;max-height:45rem;width:14rem" :options="data_list" optionLabel="label" optionValue="id"  />
             </template>
         </Card>
     </div>
