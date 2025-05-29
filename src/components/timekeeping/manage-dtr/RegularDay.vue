@@ -45,7 +45,11 @@
 
         <Column field="" header="Work Hours"></Column>
         <Column field="" header="Day"></Column>
-        <Column field="" header="Late"></Column>
+        <Column field="late" header="Late">
+            <template #body="slotProps">
+                {{ (slotProps.data.late > 0) ? 1 : '' }}
+            </template>
+        </Column>
         <Column field="" header="" headerStyle="font-weight:500;text-align:center;">
             <template #header>
                 Night Diff <br> (Hrs)
