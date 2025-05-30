@@ -77,7 +77,7 @@
         dtrData.value = data;
         
         // refRegularDay.value.setLoadingState(true);
-        await refRegularDay.value.setData(data.value.regular);
+        await refRegularDay.value.setData(data.value.regular,data.value.sched);
         // refRegularDay.value.setLoadingState(false);
 
         rawLogs.value = data.value.raw_logs;

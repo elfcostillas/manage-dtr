@@ -8,30 +8,30 @@
         <template #center ></template>
         <template #end ></template>
     </Toolbar>
-    <DataTable :value="dataTable" :rowStyle="fnBackGround" scrollable scrollHeight ="36rem" style="font-size: 10pt;" :loading="loading">
+    <DataTable editMode="cell" @cell-edit-complete="onCellEditComplete" :value="dataTable" :rowStyle="fnBackGround" scrollable scrollHeight ="36rem" style="font-size: 10pt;" :loading="loading">
         <template #loading> Processing. Please wait. </template>
         <template #empty > <div style="text-align: center;">  No records found. </div> </template>
-        <Column field="" header="Week Day">
+       
+        <Column field="" header="Date" headerStyle="text-align:center;" style="text-align: center;" >
             <template #body="slotProps">
                 <div style="text-align:center;">
-                    {{ (slotProps.data.dtr_date) ? format(slotProps.data.dtr_date,"EEE") : ''  }}
-                </div>
-            </template>
-        </Column>
-        <Column field="" header="Date" >
-            <template #body="slotProps">
-                <div style="text-align:center;">
+                    {{ (slotProps.data.dtr_date) ? format(slotProps.data.dtr_date,"EEE") : ''  }} <br>
                     {{ (slotProps.data.dtr_date) ? format(slotProps.data.dtr_date,"MM/dd/yyyy") : ''  }}
                 </div>
             </template>
+          
         </Column>
-        <Column header="Schedule">
+        <Column header="Schedule" field="time_in" style="text-align: center;width:10rem;">
             <template #body="slotProps">
-                {{ slotProps.data.sched_time_in }}-{{ slotProps.data.sched_time_out }}
+                <div style="background-color: #daf0ff;">{{ slotProps.data.sched_time_in }}</div>
+                <div style="background-color: #6ac5f3;">{{ slotProps.data.sched_time_out }}</div>
+            </template>
+             <template #editor="{ data, field }">
+                <Select v-model="data[field]" :options="sched_options" optionLabel="label" optionValue="id" placeholder="Select" style="width:8rem" ></Select>
             </template>
         </Column>
-        <Column field="time_in" header="Time In"></Column>
-        <Column field="time_out" header="Time Out"></Column>
+        <Column field="time_in" header="Time In" style="text-align: center;"></Column>
+        <Column field="time_out" header="Time Out" style="text-align: center;"></Column>
         <Column field="ot_in" header="" headerStyle="font-weight:500;text-align:center;">
             <template #header>
                Time In <br> (Over Time)
@@ -43,11 +43,20 @@
             </template>
         </Column>
 
-        <Column field="" header="Work Hours"></Column>
-        <Column field="" header="Day"></Column>
-        <Column field="late" header="Late">
+        <Column field="hrs" header="Work Hours" style="text-align: center;" ></Column>
+        <Column field="ndays" header="Day" style="text-align: center;" >
             <template #body="slotProps">
-                {{ (slotProps.data.late > 0) ? 1 : '' }}
+                {{ (slotProps.data.ndays > 0) ? slotProps.data.ndays : '' }}
+            </template>
+        </Column>
+        <Column field="late" header="Late" style="text-align: center;" bodyStyle="color:#FF4D00;font-weight:bold;">
+            <template #body="slotProps">
+                {{ (slotProps.data.late > 0) ? slotProps.data.late : '' }}
+            </template>
+        </Column>
+        <Column field="under_time" header="Under Time" style="text-align: center;" bodyStyle="color:#FF4D00;font-weight:bold;">
+            <template #body="slotProps">
+                {{ (Number(slotProps.data.under_time) > 0) ? Number(slotProps.data.under_time) : '' }}
             </template>
         </Column>
         <Column field="" header="" headerStyle="font-weight:500;text-align:center;">
@@ -58,6 +67,11 @@
         <Column field="" header="" headerStyle="font-weight:500;text-align:center;">
             <template #header>
                 Over Time <br> (Hrs)
+            </template>
+        </Column>
+        <Column field="awol" header="AWOL" headerStyle="font-weight:500;text-align:center;">
+           <template #body="slotProps">
+                {{ (Number(slotProps.data.awol) > 0) ? Number(slotProps.data.awol) : '' }}
             </template>
         </Column>
 
@@ -77,8 +91,15 @@
 
     const toast = useToast();
     const dtr_store = useManageDTRStore();
+    const sched_options = ref();
 
     const props = defineProps(['data']);
+
+    const onCellEditComplete = (event) => {
+        let { data, newValue, field } = event;
+
+        console.log(data,newValue,field);
+    };
     
     const computeLogs = () => {
         confirm.require({       
@@ -128,8 +149,10 @@
         
     });
 
-    const setData = (data) => {
+    const setData = (data,sched) => {
         dataTable.value = data;
+        console.log(sched);
+        sched_options.value = sched;
         loading.value = false;
     };
 
