@@ -4,11 +4,12 @@
             <Button icon="pi pi-calculator" @click="computeLogs" class="mr-2" severity="secondary" label="Compute" /> 
             <Button icon="pi pi-list" @click="showLogs" class="mr-2" severity="secondary" label="Show Logs" /> 
             <Button icon="pi pi-download" @click="drawLogs" class="mr-2" severity="secondary" label="Draw Logs" /> 
+            <Button icon="pi pi-pen-to-square" @click="filloutLogout" class="mr-2" severity="secondary" label="Fill in Logout" /> 
         </template>
         <template #center ></template>
         <template #end ></template>
     </Toolbar>
-    <DataTable editMode="cell" @cell-edit-complete="onCellEditComplete" :value="dataTable" :rowStyle="fnBackGround" scrollable scrollHeight ="36rem" style="font-size: 10pt;" :loading="loading">
+    <DataTable editMode="cell" dataKey="id" @cell-edit-complete="onCellEditComplete" :value="dataTable" :rowStyle="fnBackGround" scrollable scrollHeight ="36rem" style="font-size: 10pt;" :loading="loading">
         <template #loading> Processing. Please wait. </template>
         <template #empty > <div style="text-align: center;">  No records found. </div> </template>
        
@@ -21,14 +22,15 @@
             </template>
           
         </Column>
-        <Column header="Schedule" field="time_in" style="text-align: center;width:10rem;">
-            <template #body="slotProps">
+        <Column header="Schedule" field="schedule_id" style="text-align: center;width:10rem;">
+            <template #editor="{ data, field }">
+                <Select style="width:8rem" v-model="data[field]" :options="sched_options" optionLabel="label" optionValue="id" placeholder="Select" ></Select>
+            </template>
+            <!-- <template #body="slotProps">
                 <div style="background-color: #daf0ff;">{{ slotProps.data.sched_time_in }}</div>
                 <div style="background-color: #6ac5f3;">{{ slotProps.data.sched_time_out }}</div>
-            </template>
-             <template #editor="{ data, field }">
-                <Select v-model="data[field]" :options="sched_options" optionLabel="label" optionValue="id" placeholder="Select" style="width:8rem" ></Select>
-            </template>
+            </template> -->
+          
         </Column>
         <Column field="time_in" header="Time In" style="text-align: center;"></Column>
         <Column field="time_out" header="Time Out" style="text-align: center;"></Column>
@@ -92,13 +94,62 @@
     const toast = useToast();
     const dtr_store = useManageDTRStore();
     const sched_options = ref();
+    const cellEditing = ref();
 
     const props = defineProps(['data']);
 
     const onCellEditComplete = (event) => {
         let { data, newValue, field } = event;
+        console.log(event);
 
-        console.log(data,newValue,field);
+        // confirm.require({       
+        //     message: 'Are you sure you want to change schedule?',
+        //     header: 'Confirmation',
+        //     icon: 'pi pi-exclamation-triangle',
+        //     rejectProps: {
+        //         label: 'Cancel',
+        //         severity: 'secondary',
+        //         outlined: true
+        //     },
+        //     acceptProps: {
+        //         label: 'Proceed'
+        //     },
+        //     accept: async () => {
+        //         // await dtr_store.filloutLogout();
+        //         // emit('reloadLogs')
+
+        //         // console.log(data[field]);
+        //         console.log(event);
+              
+        //     },
+        //     reject: () => {
+              
+        //     }
+        // });
+    };
+
+    const filloutLogout = () => {
+        confirm.require({       
+            message: 'Are you sure you want to fill out missing logout for overtime?',
+            header: 'Confirmation',
+            icon: 'pi pi-exclamation-triangle',
+            rejectProps: {
+                label: 'Cancel',
+                severity: 'secondary',
+                outlined: true
+            },
+            acceptProps: {
+                label: 'Fill Out'
+            },
+            accept: async () => {
+                await dtr_store.filloutLogout();
+                emit('reloadLogs')
+
+            },
+            reject: () => {
+              
+            }
+        });
     };
     
     const computeLogs = () => {
@@ -151,7 +202,7 @@
 
     const setData = (data,sched) => {
         dataTable.value = data;
-        console.log(sched);
+     
         sched_options.value = sched;
         loading.value = false;
     };

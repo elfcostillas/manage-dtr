@@ -98,7 +98,7 @@
                 style = 'background-color:#FFE5B4'; //
             break;
 
-            case 'autofill' :
+            case 'fill-out' :
                 style = 'background-color:#FAA0A0';
             break;
             
