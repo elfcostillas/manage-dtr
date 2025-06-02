@@ -73,6 +73,18 @@ export const useManageDTRStore = defineStore("manageDTRStore", () => {
         return dtr_data;
     };
 
+    const updateLog = async (arrayData) => {
+
+        try{
+            const { data } = await postFN(`api/timekeeping/manage-dtr-semi/update-logs`,arrayData);
+            dtr_data.value = data;
+        }catch(error){
+
+        }
+
+        return dtr_data;
+    };
+
     return {
         getDTRData,
         setSelectedEmpAndPeriod,
@@ -80,6 +92,7 @@ export const useManageDTRStore = defineStore("manageDTRStore", () => {
         selectedPeriod,
         drawLogs,
         computeLogs,
-        filloutLogout
+        filloutLogout,
+        updateLog
     };
 });

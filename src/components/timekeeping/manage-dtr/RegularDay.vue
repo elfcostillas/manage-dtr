@@ -26,10 +26,10 @@
             <template #editor="{ data, field }">
                 <Select style="width:8rem" v-model="data[field]" :options="sched_options" optionLabel="label" optionValue="id" placeholder="Select" ></Select>
             </template>
-            <!-- <template #body="slotProps">
+            <template #body="slotProps">
                 <div style="background-color: #daf0ff;">{{ slotProps.data.sched_time_in }}</div>
                 <div style="background-color: #6ac5f3;">{{ slotProps.data.sched_time_out }}</div>
-            </template> -->
+            </template>
           
         </Column>
         <Column field="time_in" header="Time In" style="text-align: center;"></Column>
@@ -56,19 +56,33 @@
                 {{ (slotProps.data.late > 0) ? slotProps.data.late : '' }}
             </template>
         </Column>
-        <Column field="under_time" header="Under Time" style="text-align: center;" bodyStyle="color:#FF4D00;font-weight:bold;">
+        <Column field="under_time" header="" headerStyle="font-weight:500;text-align:center;" style="text-align: center;" bodyStyle="color:#FF4D00;font-weight:bold;">
+            <template #header>
+                Under <br> Time
+            </template>
             <template #body="slotProps">
                 {{ (Number(slotProps.data.under_time) > 0) ? Number(slotProps.data.under_time) : '' }}
             </template>
         </Column>
-        <Column field="" header="" headerStyle="font-weight:500;text-align:center;">
+        <Column field="night_diff" header="" headerStyle="font-weight:500;text-align:center;">
             <template #header>
                 Night Diff <br> (Hrs)
+            </template>
+            <template #body="slotProps">
+                {{ (Number(slotProps.data.night_diff) > 0) ? Number(slotProps.data.night_diff) : '' }}
             </template>
         </Column>
         <Column field="" header="" headerStyle="font-weight:500;text-align:center;">
             <template #header>
                 Over Time <br> (Hrs)
+            </template>
+        </Column>
+         <Column field="night_diff_ot" header="" headerStyle="font-weight:500;text-align:center;">
+            <template #header>
+                Night Diff OT <br> (Hrs)
+            </template>
+            <template #body="slotProps">
+                {{ (Number(slotProps.data.night_diff_ot) > 0) ? Number(slotProps.data.night_diff_ot) : '' }}
             </template>
         </Column>
         <Column field="awol" header="AWOL" headerStyle="font-weight:500;text-align:center;">
@@ -98,34 +112,37 @@
 
     const props = defineProps(['data']);
 
-    const onCellEditComplete = (event) => {
+    const onCellEditComplete = async (event) => {
         let { data, newValue, field } = event;
-        console.log(event);
+        // console.log(event);
 
-        // confirm.require({       
-        //     message: 'Are you sure you want to change schedule?',
-        //     header: 'Confirmation',
-        //     icon: 'pi pi-exclamation-triangle',
-        //     rejectProps: {
-        //         label: 'Cancel',
-        //         severity: 'secondary',
-        //         outlined: true
-        //     },
-        //     acceptProps: {
-        //         label: 'Proceed'
-        //     },
-        //     accept: async () => {
-        //         // await dtr_store.filloutLogout();
-        //         // emit('reloadLogs')
+        confirm.require({       
+            message: 'Are you sure you want to change schedule?',
+            header: 'Confirmation',
+            icon: 'pi pi-exclamation-triangle',
+            rejectProps: {
+                label: 'Cancel',
+                severity: 'secondary',
+                outlined: true
+            },
+            acceptProps: {
+                label: 'Proceed'
+            },
+            accept: async () => {
+                data[field] = newValue
+                let result = await dtr_store.updateLog(data);
+                emit('reloadLogs');
+                // await dtr_store.filloutLogout();
+                // emit('reloadLogs')
 
-        //         // console.log(data[field]);
-        //         console.log(event);
+                // console.log(data[field] = newValue);
+                // console.log(event);
               
-        //     },
-        //     reject: () => {
+            },
+            reject: () => {
               
-        //     }
-        // });
+            }
+        });
     };
 
     const filloutLogout = () => {
