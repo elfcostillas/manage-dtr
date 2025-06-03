@@ -34,29 +34,29 @@
         </Column>
         <Column field="time_in" header="Time In" style="text-align: center;"></Column>
         <Column field="time_out" header="Time Out" style="text-align: center;"></Column>
-        <Column field="ot_in" header="" headerStyle="font-weight:500;text-align:center;">
+        <Column field="ot_in" header=""  bodyStyle="text-align:center;" headerStyle="font-weight:500;text-align:center;">
             <template #header>
                Time In <br> (Over Time)
             </template>
         </Column>
-        <Column field="ot_out" header="" headerStyle="font-weight:500;text-align:center;">
+        <Column field="ot_out" header="" bodyStyle="text-align:center;" headerStyle="font-weight:500;text-align:center;">
             <template #header>
                 Time Out <br> (Over Time)
             </template>
         </Column>
 
         <Column field="hrs" header="Work Hours" style="text-align: center;" ></Column>
-        <Column field="ndays" header="Day" style="text-align: center;" >
+        <Column field="ndays" header="Day" bodyStyle="text-align: center;"  headerStyle="text-align: center;" >
             <template #body="slotProps">
                 {{ (slotProps.data.ndays > 0) ? slotProps.data.ndays : '' }}
             </template>
         </Column>
-        <Column field="late" header="Late" style="text-align: center;" bodyStyle="color:#FF4D00;font-weight:bold;">
+        <Column field="late" header="Late" style="text-align: center;" bodyStyle="text-align:center;color:#FF4D00;font-weight:bold;">
             <template #body="slotProps">
                 {{ (slotProps.data.late > 0) ? slotProps.data.late : '' }}
             </template>
         </Column>
-        <Column field="under_time" header="" headerStyle="font-weight:500;text-align:center;" style="text-align: center;" bodyStyle="color:#FF4D00;font-weight:bold;">
+        <Column field="under_time" header="" headerStyle="font-weight:500;text-align:center;" style="text-align: center;" bodyStyle="text-align:center;color:#FF4D00;font-weight:bold;">
             <template #header>
                 Under <br> Time
             </template>
@@ -64,7 +64,7 @@
                 {{ (Number(slotProps.data.under_time) > 0) ? Number(slotProps.data.under_time) : '' }}
             </template>
         </Column>
-        <Column field="night_diff" header="" headerStyle="font-weight:500;text-align:center;">
+        <Column field="night_diff" header="" headerStyle="font-weight:500;text-align:center;" bodyStyle="text-align:center;">
             <template #header>
                 Night Diff <br> (Hrs)
             </template>
@@ -72,12 +72,15 @@
                 {{ (Number(slotProps.data.night_diff) > 0) ? Number(slotProps.data.night_diff) : '' }}
             </template>
         </Column>
-        <Column field="" header="" headerStyle="font-weight:500;text-align:center;">
+        <Column field="over_time" header="" headerStyle="font-weight:500;text-align:center;" bodyStyle="text-align:center;">
             <template #header>
                 Over Time <br> (Hrs)
             </template>
+            <template #body="slotProps">
+                {{ (Number(slotProps.data.over_time) > 0) ? Number(slotProps.data.over_time) : '' }}
+            </template>
         </Column>
-         <Column field="night_diff_ot" header="" headerStyle="font-weight:500;text-align:center;">
+         <Column field="night_diff_ot" header="" headerStyle="font-weight:500;text-align:center;" bodyStyle="text-align:center;">
             <template #header>
                 Night Diff OT <br> (Hrs)
             </template>
@@ -85,7 +88,7 @@
                 {{ (Number(slotProps.data.night_diff_ot) > 0) ? Number(slotProps.data.night_diff_ot) : '' }}
             </template>
         </Column>
-        <Column field="awol" header="AWOL" headerStyle="font-weight:500;text-align:center;">
+        <Column field="awol" header="AWOL" headerStyle="font-weight:500;text-align:center;" bodyStyle="text-align:center;">
            <template #body="slotProps">
                 {{ (Number(slotProps.data.awol) > 0) ? Number(slotProps.data.awol) : '' }}
             </template>
