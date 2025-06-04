@@ -6,7 +6,7 @@ import FTPMainPage from '@/components/timekeeping/ftp/MainPage.vue'
 import DTRMainPage from '@/components/timekeeping/manage-dtr/MainPage.vue'
 import FTPApprovalMainPage from '@/components/timekeeping/ftp-approval/MainPage.vue'
 import SemiMonthlyMainPage from '@/components/timekeeping/payroll-period/semi-monthly/MainPage.vue'
-
+import UserRightPage from '@/components/user-settings/user-rights/MainPage.vue'
 
 // import InstallmentPage from '@/components/deductions/installments/MainPage.vue'
 // import GovtLoanPage from '@/components/deductions/gov-deductions/MainPage.vue'
@@ -73,6 +73,12 @@ const router = createRouter({
       path : '/timekeeping/payroll-period/semi',
       name : 'semi-monthly',
       component : SemiMonthlyMainPage
+    },
+
+    {
+      path : '/user-settings/user-rights',
+      name : 'user-rights',
+      component : UserRightPage
     },
 
     

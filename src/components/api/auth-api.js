@@ -7,3 +7,5 @@ export const logout = () => api.post("/auth/logout");
 export const register = (credentials) => api.post("/auth/register",credentials);
 
 export const getUser = () => api.get("api/user");
+
+export const getModules = () => api.get('api/navigator/user-modules');

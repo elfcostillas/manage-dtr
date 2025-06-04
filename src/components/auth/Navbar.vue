@@ -40,9 +40,11 @@
 </template>
 
 <script setup>
-    import { ref } from "vue";
+    import { onMounted, ref } from "vue";
     import { useAuthStore } from "@/stores/auth";
     import { useRouter } from "vue-router";
+    import { getModules } from "../api/auth-api";
+
     const router = useRouter();
 
     const authStore = useAuthStore();
@@ -62,6 +64,40 @@
         router.push({ name : 'login'});
         
     }
+
+    const items = ref([
+        {
+            label: 'Home',
+            icon: 'pi pi-home',
+            route : '/'
+        }
+    ]);
+
+    onMounted(async()=> {
+        let { data } = await getModules();
+
+        // console.log(data.user.user_rights);
+        if(data.user.user_rights == 'Y'){
+            items.value.push({
+                label: 'User Settings',
+                icon: 'pi pi-user-edit',
+                items: [
+                    {
+                        label: 'User Rights',
+                        icon: 'pi pi-list-check',
+                        route : '/user-settings/user-rights'
+                    }
+                ]
+            });
+        }
+
+        items.value.push(data.modules[0]);
+
+        // console.log(items.value,data.modules)
+
+        // items.value  = data.modules;
+    
+    });
 
     // function showLogOut()
     // {
@@ -86,16 +122,15 @@
     //     // router.push({ name : 'home' });
     // }
 
+    
+
+    /*
     const items = ref([
         {
             label: 'Home',
             icon: 'pi pi-home',
             route : '/'
         },
-        // {
-        //     label: 'Features',
-        //     icon: 'pi pi-star'
-        // },
         {
             label: 'Timekeeping',
             icon: 'pi pi-clock',
@@ -130,6 +165,7 @@
         },
 
     ]);
+    */
 
 </script>
 
