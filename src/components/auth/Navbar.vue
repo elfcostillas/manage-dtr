@@ -65,38 +65,49 @@
         
     }
 
-    const items = ref([
-        {
-            label: 'Home',
-            icon: 'pi pi-home',
-            route : '/'
-        }
-    ]);
+    const items = ref(null);
 
     onMounted(async()=> {
-        let { data } = await getModules();
-
-        // console.log(data.user.user_rights);
-        if(data.user.user_rights == 'Y'){
-            items.value.push({
-                label: 'User Settings',
-                icon: 'pi pi-user-edit',
-                items: [
-                    {
-                        label: 'User Rights',
-                        icon: 'pi pi-list-check',
-                        route : '/user-settings/user-rights'
-                    }
-                ]
-            });
-        }
-
-        items.value.push(data.modules[0]);
-
-        // console.log(items.value,data.modules)
-
-        // items.value  = data.modules;
+        reloadNavBar();
     
+    });
+
+    const reloadNavBar = async () => {
+
+        await authStore.getUserModules();
+        items.value = authStore.user_modules;
+
+        // console.log(items.value);
+
+        // let { data } = await getModules();
+
+        // items.value = [
+        //     {
+        //         label: 'Home',
+        //         icon: 'pi pi-home',
+        //         route : '/'
+        //     }
+        // ];
+
+        // if(data.user.user_rights == 'Y'){
+        //     items.value.push({
+        //         label: 'User Settings',
+        //         icon: 'pi pi-user-edit',
+        //         items: [
+        //             {
+        //                 label: 'User Rights',
+        //                 icon: 'pi pi-list-check',
+        //                 route : '/user-settings/user-rights'
+        //             }
+        //         ]
+        //     });
+        // }
+
+        // items.value.push(data.modules[0]);
+    };
+
+    defineExpose({
+        reloadNavBar
     });
 
     // function showLogOut()

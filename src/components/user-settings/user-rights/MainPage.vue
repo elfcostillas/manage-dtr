@@ -1,6 +1,7 @@
 <template>
     <div class="flex gap-2 justify-center">
-        
+       
+        <TablePage></TablePage> 
     </div>
 </template>
 

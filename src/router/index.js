@@ -108,7 +108,7 @@ router.beforeEach(async(to,from) => {
 
   // console.log(to.fullPath == 'login');
 
-  console.log(authStore.isLoggedIn , to.fullPath);
+  // console.log(authStore.isLoggedIn , to.fullPath);
 
   if(authStore.isLoggedIn == true && to.fullPath == '/login')
   {
@@ -123,6 +123,7 @@ router.beforeEach(async(to,from) => {
     return { name : 'login' };
     
   }
+
  
 });
 

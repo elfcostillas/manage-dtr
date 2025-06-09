@@ -2,6 +2,9 @@ import { csrfCookie,login,getUser,logout,register } from "@/components/api/auth-
 import { defineStore } from "pinia";
 import { ref,computed } from "vue";
 
+// export const getModules = () => api.get('api/navigator/user-modules');
+import { getModules } from "@/components/api/auth-api";
+
 export const useAuthStore = defineStore("authStore", ()=>{
     
     const user = ref(null);
@@ -12,8 +15,38 @@ export const useAuthStore = defineStore("authStore", ()=>{
     const d = ref();
     const s = ref();
 
+    const user_modules = ref();
+
     const isLoggedIn = computed(()=> !!user.value);
     // const isLoggedIn = computed(()=> true );
+
+    const getUserModules = async () => {
+        let { data }  = await getModules();
+
+         user_modules.value = [
+            {
+                label: 'Home',
+                icon: 'pi pi-home',
+                route : '/'
+            }
+        ];
+
+        if(data.user.user_rights == 'Y'){
+            user_modules.value.push({
+                label: 'User Settings',
+                icon: 'pi pi-user-edit',
+                items: [
+                    {
+                        label: 'User Rights',
+                        icon: 'pi pi-list-check',
+                        route : '/user-settings/user-rights'
+                    }
+                ]
+            });
+        }
+
+        user_modules.value.push(data.modules[0]);
+    };
  
     const handleLogin = async (credentials) => {
       
@@ -76,7 +109,9 @@ export const useAuthStore = defineStore("authStore", ()=>{
         fetchUser,
         authDialog,
         handleLogout,
-        handleRegister
+        handleRegister,
+        getUserModules,
+        user_modules,
     }
 });
 
