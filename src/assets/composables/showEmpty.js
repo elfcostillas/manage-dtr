@@ -23,7 +23,6 @@ export const showEmpty = (object) => {
 
     if(error.value){
         return { severity: 'error', summary: 'Error', detail: 'Please fill up required fields.', life: 3000 };
-        
     }
 
     return false;

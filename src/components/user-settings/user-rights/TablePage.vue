@@ -26,11 +26,16 @@
             <Column header="Module" field="label"></Column>
         </DataTable>
     </Dialog>
+
+    <Toast></Toast>
 </template>
 
 <script setup>
     import { useUserStore } from '@/stores/user';
     import { ref,onMounted } from 'vue';    
+
+    import { useToast } from 'primevue/usetoast';
+    const toast = useToast();
 
     const userStore = useUserStore();
 
@@ -44,6 +49,8 @@
     const saveRights = async () => {
         console.log(selectedModules.value,selectedUser.value);
         await userStore.saveRights(selectedModules.value,selectedUser.value);
+
+        toast.add( { severity: 'success', summary: 'Success', detail: 'Access Rights saved successfully.', life: 3000 });
 
     };
 
