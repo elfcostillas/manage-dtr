@@ -45,7 +45,14 @@ export const useAuthStore = defineStore("authStore", ()=>{
             });
         }
 
-        user_modules.value.push(data.modules[0]);
+        // user_modules.value.push(data.modules[0]);
+        // user_modules.value.push(data.modules[0]);
+
+        data.modules.forEach((x, index) => {
+            user_modules.value.push(x);
+        });
+
+        // console.log(data.modules);
     };
  
     const handleLogin = async (credentials) => {

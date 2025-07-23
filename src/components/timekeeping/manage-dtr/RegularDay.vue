@@ -88,7 +88,7 @@
                 {{ (Number(slotProps.data.night_diff_ot) > 0) ? Number(slotProps.data.night_diff_ot) : '' }}
             </template>
         </Column>
-        <Column field="awol" header="AWOL" headerStyle="font-weight:500;text-align:center;" bodyStyle="text-align:center;">
+        <Column field="awol" header="AWOL" headerStyle="font-weight:500;text-align:center;" bodyStyle="text-align:center;color:#FF4D00;font-weight:bold;">
            <template #body="slotProps">
                 {{ (Number(slotProps.data.awol) > 0) ? Number(slotProps.data.awol) : '' }}
             </template>
@@ -118,34 +118,38 @@
     const onCellEditComplete = async (event) => {
         let { data, newValue, field } = event;
         // console.log(event);
+        // console.log('data :' + data[field] + 'newvalue :' + newValue + 'field : ' + field);
 
-        confirm.require({       
-            message: 'Are you sure you want to change schedule?',
-            header: 'Confirmation',
-            icon: 'pi pi-exclamation-triangle',
-            rejectProps: {
-                label: 'Cancel',
-                severity: 'secondary',
-                outlined: true
-            },
-            acceptProps: {
-                label: 'Proceed'
-            },
-            accept: async () => {
-                data[field] = newValue
-                let result = await dtr_store.updateLog(data);
-                emit('reloadLogs');
-                // await dtr_store.filloutLogout();
-                // emit('reloadLogs')
+        if( data[field] != newValue){
+            confirm.require({       
+                message: 'Are you sure you want to change schedule?',
+                header: 'Confirmation',
+                icon: 'pi pi-exclamation-triangle',
+                rejectProps: {
+                    label: 'Cancel',
+                    severity: 'secondary',
+                    outlined: true
+                },
+                acceptProps: {
+                    label: 'Proceed'
+                },
+                accept: async () => {
+                    data[field] = newValue
+                    let result = await dtr_store.updateLog(data);
+                    emit('reloadLogs');
+                    // await dtr_store.filloutLogout();
+                    // emit('reloadLogs')
 
-                // console.log(data[field] = newValue);
-                // console.log(event);
-              
-            },
-            reject: () => {
-              
-            }
-        });
+                    // console.log(data[field] = newValue);
+                    // console.log(event);
+                
+                },
+                reject: () => {
+                
+                }
+            });
+        }
+        
     };
 
     const filloutLogout = () => {

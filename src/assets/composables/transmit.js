@@ -8,11 +8,16 @@ export const postFN = async (url, params) => {
   const count = ref(null)
 
   try {
-    const { data } = await api.post(url, params)
-    ;(data_arr.value = data.data),
-      (status.value = data.status),
-      (message.value = data.message),
-      (count.value = data.count)
+    const { data } = await api.post(url, params);
+    // (data_arr.value = data.data),
+    //   (status.value = data.status),
+    //   (message.value = data.message),
+    //   (count.value = data.count)
+      data_arr.value = data.data;
+      status.value = data.status;
+      message.value = data.message;
+      count.value = data.count;
+     
   } catch (error) {}
 
   return {
@@ -30,11 +35,16 @@ export const getFN = async (url, params) => {
   const count = ref(null)
 
   try {
-    const { data } = await api.get(url)
-    ;(data_arr.value = data.data),
-      (status.value = data.status),
-      (message.value = data.message),
-      (count.value = data.count)
+    const { data } = await api.get(url);
+    // (data_arr.value = data.data),
+    // (status.value = data.status),  
+    // (message.value = data.message),
+    // (count.value = data.count)
+
+    data_arr.value = data.data;
+    status.value = data.status;
+    message.value = data.message;
+    count.value = data.count;
   } catch (error) {}
 
   return {

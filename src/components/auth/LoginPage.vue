@@ -1,6 +1,6 @@
 <template>
     <div class="card flex justify-center" >
-        <Image style="margin:4rem auto;" src="public/images/jlr_logo.png" alt="Image" width="250" />
+        <Image style="margin:4rem auto;" src="images/jlr_logo.png" alt="Image" width="250" />
     </div>    
     <Card style="width: 26rem; margin:0rem auto;font-size:10pt;" >
         <template #title>Log In</template>

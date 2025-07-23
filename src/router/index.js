@@ -7,6 +7,7 @@ import DTRMainPage from '@/components/timekeeping/manage-dtr/MainPage.vue'
 import FTPApprovalMainPage from '@/components/timekeeping/ftp-approval/MainPage.vue'
 import SemiMonthlyMainPage from '@/components/timekeeping/payroll-period/semi-monthly/MainPage.vue'
 import UserRightPage from '@/components/user-settings/user-rights/MainPage.vue'
+import EditRawLogsMainPage from '@/components/timekeeping/logs/MainPage.vue'
 
 // import InstallmentPage from '@/components/deductions/installments/MainPage.vue'
 // import GovtLoanPage from '@/components/deductions/gov-deductions/MainPage.vue'
@@ -80,6 +81,13 @@ const router = createRouter({
       name : 'user-rights',
       component : UserRightPage
     },
+    {
+      path : '/logs/edit-raw-logs',
+      name : 'edit-raw-logs',
+      component : EditRawLogsMainPage
+    },
+
+    
 
     
 

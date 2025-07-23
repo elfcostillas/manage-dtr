@@ -182,4 +182,8 @@
 
 <style>
 
+    .p-menubar-item {
+        z-index: 999;
+        color : red;
+    }
 </style>

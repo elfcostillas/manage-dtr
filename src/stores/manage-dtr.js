@@ -7,6 +7,7 @@ export const useManageDTRStore = defineStore("manageDTRStore", () => {
     const dtr_data = ref(null);
     const selectedEmployee = ref(null);
     const selectedPeriod = ref(null);
+    const dtr_rawlogs = ref(null);
 
     const setSelectedEmpAndPeriod = (period_id,emp_id) => {
         selectedEmployee.value = emp_id;
@@ -22,6 +23,17 @@ export const useManageDTRStore = defineStore("manageDTRStore", () => {
         }
 
         return dtr_data;
+    };
+
+    const getRawLogs = async(period_id,emp_id) => {
+        try{
+            const { data } = await getFN(`api/timekeeping/logs/data/${period_id}/${emp_id}`,null);
+            dtr_rawlogs.value = data;
+        }catch(error){
+
+        }
+
+        return dtr_rawlogs;
     };
 
     const drawLogs = async () => {
@@ -78,11 +90,24 @@ export const useManageDTRStore = defineStore("manageDTRStore", () => {
         try{
             const { data } = await postFN(`api/timekeeping/manage-dtr-semi/update-logs`,arrayData);
             dtr_data.value = data;
+           
         }catch(error){
 
         }
 
         return dtr_data;
+    };
+
+    const updateRawLog = async (arrayData) => {
+        try{
+            const data = await postFN(`api/timekeeping/logs/update-log`,arrayData);
+            
+            dtr_data.value = data;
+        }catch(error){
+
+        }
+
+        return dtr_data.value;
     };
 
     return {
@@ -93,6 +118,8 @@ export const useManageDTRStore = defineStore("manageDTRStore", () => {
         drawLogs,
         computeLogs,
         filloutLogout,
-        updateLog
+        updateLog,
+        getRawLogs,
+        updateRawLog
     };
 });

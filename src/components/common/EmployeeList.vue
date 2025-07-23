@@ -12,10 +12,10 @@
                 </TabList>
                 <TabPanels>
                     <TabPanel value="0" >
-                        <Listbox listStyle="min-height:36rem;max-height:36rem;font-size:11pt;" @click="selectEvent" v-model="selectedEmployee" :options="active_employees" filter optionLabel="emp_name" optionValue="id"  />
+                        <Listbox listStyle="min-height:36rem;max-height:36rem;font-size:10pt;" @click="selectEvent" v-model="selectedEmployee" :options="active_employees" filter optionLabel="emp_name" optionValue="id"  />
                     </TabPanel>
                     <TabPanel value="1">
-                        <Listbox listStyle="min-height:36rem;max-height:36rem;font-size:11pt;" @click="selectEvent" v-model="selectedEmployee" :options="inactive_employees" filter optionLabel="emp_name" optionValue="id" />
+                        <Listbox listStyle="min-height:36rem;max-height:36rem;font-size:10pt;" @click="selectEvent" v-model="selectedEmployee" :options="inactive_employees" filter optionLabel="emp_name" optionValue="id" />
                     </TabPanel>
                 </TabPanels>
             </Tabs>
