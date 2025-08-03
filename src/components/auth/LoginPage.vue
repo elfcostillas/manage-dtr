@@ -15,7 +15,7 @@
         </template>
         
     </Card>
-    
+    <Toast></Toast>
 </template>
 
 <script setup>
@@ -40,10 +40,16 @@
     const email = ref(null);
     const password = ref(null);
 
-    import { ref } from "vue";
+    import { onMounted, ref } from "vue";
     import { useAuthStore } from  "@/stores/auth.js"
     import { useToast } from "primevue/usetoast";
     import { popToast } from "@/assets/composables/showToast";
+    import { csrfCookie,login,getUser,logout,register } from "@/components/api/auth-api";
+
+    onMounted(async() => {
+        // await csrfCookie();
+    });
+
     const toast = useToast();
     const router = useRouter();
 

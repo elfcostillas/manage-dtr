@@ -10,6 +10,7 @@
             <TablePage ref="dtrTable" @reloadLogs="reloadLogs" ></TablePage>
         </div>
     </div>
+
 </template>
 
 <script setup>
@@ -44,8 +45,7 @@
 
         payperiodList.value.setData(payrollperiod.value);
 
-        // let employees = await employee_store.getEmployeeList();
-        let employees = await employee_store.getEmployeeListByLevel(5);
+        let employees = await employee_store.getEmployeeListByLevel(4);
         empList.value.setNames(employees);
 
         active_employees.value = employees.value.active;

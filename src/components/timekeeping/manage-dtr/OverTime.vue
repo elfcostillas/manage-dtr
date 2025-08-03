@@ -22,7 +22,7 @@
             </template>
           
         </Column>
-        <Column header="Schedule" field="schedule_id" style="text-align: center;width:10rem;">
+        <Column header="Schedule" field="schedule_id" style="text-align: center;">
             <template #editor="{ data, field }">
                 <Select style="width:8rem" v-model="data[field]" :options="sched_options" optionLabel="label" optionValue="id" placeholder="Select" ></Select>
             </template>
@@ -32,46 +32,58 @@
             </template>
           
         </Column>
-        <Column field="time_in" header="Time In" style="text-align: center;"></Column>
-        <Column field="time_out" header="Time Out" style="text-align: center;"></Column>
-       
 
-        <Column field="hrs" header="Work Hours" style="text-align: center;" >
-            <template #body="slotProps">
-                {{ (slotProps.data.hrs > 0) ? slotProps.data.hrs : '' }}
-            </template></Column>
-        <Column field="ndays" header="Day" bodyStyle="text-align: center;"  headerStyle="text-align: center;" >
-            <template #body="slotProps">
-                {{ (slotProps.data.ndays > 0) ? slotProps.data.ndays : '' }}
-            </template>
-        </Column>
-        <Column field="late" header="Late" style="text-align: center;" bodyStyle="text-align:center;color:#FF4D00;font-weight:bold;">
-            <template #body="slotProps">
-                {{ (slotProps.data.late > 0) ? slotProps.data.late : '' }}
-            </template>
-        </Column>
-        <Column field="under_time" header="" headerStyle="font-weight:500;text-align:center;" style="text-align: center;" bodyStyle="text-align:center;color:#FF4D00;font-weight:bold;">
+        
+
+
+
+        <Column field="ot_in_am" header=""  bodyStyle="text-align:center;" headerStyle="font-weight:500;text-align:center;">
             <template #header>
-                Under <br> Time
-            </template>
-            <template #body="slotProps">
-                {{ (Number(slotProps.data.under_time) > 0) ? Number(slotProps.data.under_time) : '' }}
+               Time In <br> (Over Time BW)
             </template>
         </Column>
-        <Column field="night_diff" header="" headerStyle="font-weight:500;text-align:center;" bodyStyle="text-align:center;">
+        <Column field="ot_out_am" header="" bodyStyle="text-align:center;" headerStyle="font-weight:500;text-align:center;">
             <template #header>
-                Night Diff <br> (Hrs)
-            </template>
-            <template #body="slotProps">
-                {{ (Number(slotProps.data.night_diff) > 0) ? Number(slotProps.data.night_diff) : '' }}
+                Time Out <br> (Over Time BW)
             </template>
         </Column>
-        <Column field="awol" header="AWOL" headerStyle="font-weight:500;text-align:center;" bodyStyle="text-align:center;color:#FF4D00;font-weight:bold;">
-           <template #body="slotProps">
-                {{ (Number(slotProps.data.awol) > 0) ? Number(slotProps.data.awol) : '' }}
+        
+        <Column field="over_time_bw" header="" headerStyle="font-weight:500;text-align:center;" bodyStyle="text-align:center;">
+            <template #header>
+                Over Time - BW <br> (Hrs)
+            </template>
+            <template #body="slotProps">
+                {{ (Number(slotProps.data.over_time_bw) > 0) ? Number(slotProps.data.over_time_bw) : '' }}
+            </template>
+        </Column>
+        <Column field="ot_in" header=""  bodyStyle="text-align:center;" headerStyle="font-weight:500;text-align:center;">
+            <template #header>
+               Time In <br> (Over Time AW)
+            </template>
+        </Column>
+        <Column field="ot_out" header="" bodyStyle="text-align:center;" headerStyle="font-weight:500;text-align:center;">
+            <template #header>
+                Time Out <br> (Over Time AW)
             </template>
         </Column>
 
+        <Column field="over_time" header="" headerStyle="font-weight:500;text-align:center;" bodyStyle="text-align:center;">
+            <template #header>
+                Over Time - AW<br> (Hrs)
+            </template>
+            <template #body="slotProps">
+                {{ (Number(slotProps.data.over_time) > 0) ? Number(slotProps.data.over_time) : '' }}
+            </template>
+        </Column>
+         <Column field="night_diff_ot" header="" headerStyle="font-weight:500;text-align:center;" bodyStyle="text-align:center;">
+            <template #header>
+                Night Diff OT <br> (Hrs)
+            </template>
+            <template #body="slotProps">
+                {{ (Number(slotProps.data.night_diff_ot) > 0) ? Number(slotProps.data.night_diff_ot) : '' }}
+            </template>
+        </Column>
+      
     </DataTable>
     <!-- <ConfirmDialog></ConfirmDialog> -->
     <Toast></Toast>

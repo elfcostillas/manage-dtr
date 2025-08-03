@@ -18,7 +18,22 @@ export const useEmployeeStore = defineStore("employeeStore",() => {
         return employees;
     };
 
+    const getEmployeeListByLevel = async (type) => {
+        
+        try {
+            let url = `api/master-data/employee/list-by-level/${type}`;
+
+            const { data } = await getFN(url,null);
+            employees.value = data;
+        }catch(error){
+
+        }
+        
+        return employees;
+    };
+
     return {
-        getEmployeeList
+        getEmployeeList,
+        getEmployeeListByLevel
     };
 });

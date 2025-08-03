@@ -73,6 +73,8 @@
         { id : 'OT/Out', label : 'OT/Out' },
         { id : 'B/In', label : 'B/In' },
         { id : 'B/In', label : 'B/In' },
+        { id : 'OT/InAM', label : 'OT/InAM' },
+        { id : 'OT/OutAM', label : 'OT/OutAM' },
     ];
 
     onMounted(async() => {

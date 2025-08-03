@@ -66,7 +66,7 @@ export const useAuthStore = defineStore("authStore", ()=>{
             s.value = status;
 
             console.log(data,status);
-
+            // await csrfCookie();
             await fetchUser();
             authDialog.value = false;
 
@@ -90,6 +90,7 @@ export const useAuthStore = defineStore("authStore", ()=>{
         
             user.value = data;
         } catch(error){
+            console.log(error);
             user.value = null;
         }
     }
@@ -101,6 +102,7 @@ export const useAuthStore = defineStore("authStore", ()=>{
     const handleLogout = async () => {
         await logout();
         user.value = null;
+       
     };
 
     const handleRegister = async () => {
