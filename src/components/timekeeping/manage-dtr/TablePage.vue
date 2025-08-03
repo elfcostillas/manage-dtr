@@ -12,7 +12,7 @@
                     <Tab value="5" >Double Legal Holiday</Tab>
                 </TabList>
                 <TabPanels>
-                    <TabPanel value="0"><RegularDay ref="refRegularDay" @showLogs="showLogs" @reloadLogs="reloadLogs"></RegularDay></TabPanel>
+                    <TabPanel value="0"><RegularDayConfi ref="refRegularDay" @showLogs="showLogs" @reloadLogs="reloadLogs"></RegularDayConfi></TabPanel>
                     <TabPanel value="1"><OverTime ref="refOvertime" @showLogs="showLogs" @reloadLogs="reloadLogs"></OverTime></TabPanel>
                     <TabPanel value="2"><SpecialHoliday ref="refSpecialHoliday"></SpecialHoliday></TabPanel>
                     <TabPanel value="3"><LegalHoliday ref="refLegalHoliday"></LegalHoliday></TabPanel>
@@ -48,12 +48,15 @@
     import { ref,onMounted } from 'vue';
     import { format } from 'date-fns';
     import RegularDay from './RegularDay.vue';
+    import RegularDayConfi from './RegularDayConfi.vue';
+  
     import Restday from './Restday.vue';
     import SpecialHoliday from './SpecialHoliday.vue';
     import LegalHoliday from './LegalHoliday.vue';
     import DoubleSpecialHoliday from './DoubleSpecialHoliday.vue';
     import DoubleLegalHoliday from './DoubleLegalHoliday.vue';
-import OverTime from './OverTime.vue';
+    import OverTime from './OverTime.vue';
+
 
     const visibleRight = ref(false);
     const dtrData = ref();
