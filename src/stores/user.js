@@ -6,6 +6,7 @@ export const useUserStore = defineStore('userStore',() => {
     
     const list = ref(null);
     const modules_list = ref();
+    const rights = ref();
 
     const getList = async() => {
         try{
@@ -41,10 +42,25 @@ export const useUserStore = defineStore('userStore',() => {
         }
     };
 
+    const showRights  = async(user) => {
+        let obj = {
+            user : user
+        };
+        try {
+            const { data } = await postFN('api/user-settings/user-rights/show-rights',obj);
+            rights.value = data;
+        }catch(error){
+
+        }
+
+        return rights;
+    };
+
     return {
         getList,
         getModules,
-        saveRights
+        saveRights,
+        showRights
     };
 
 });

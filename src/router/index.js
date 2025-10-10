@@ -6,6 +6,7 @@ import FTPMainPage from '@/components/timekeeping/ftp/MainPage.vue'
 import DTRMainPage from '@/components/timekeeping/manage-dtr/MainPage.vue'
 import FTPApprovalMainPage from '@/components/timekeeping/ftp-approval/MainPage.vue'
 import SemiMonthlyMainPage from '@/components/timekeeping/payroll-period/semi-monthly/MainPage.vue'
+import SGMainPage          from '@/components/timekeeping/payroll-period-sg/MainPage.vue'
 import UserRightPage from '@/components/user-settings/user-rights/MainPage.vue'
 import EditRawLogsMainPage from '@/components/timekeeping/logs/MainPage.vue'
 import DTRMainPageConfi from '@/components/timekeeping/manage-dtr/MainPageConfi.vue'
@@ -19,6 +20,7 @@ import DTRMainPageConfi from '@/components/timekeeping/manage-dtr/MainPageConfi.
 // import PostedMainPage from '@/components/payroll-register/posted/MainPage.vue'
 
 import { useAuthStore } from '@/stores/auth'
+import DTRMainPageSG from '@/components/timekeeping/manage-dtr/DTRMainPageSG.vue'
 
 
 const router = createRouter({
@@ -76,6 +78,11 @@ const router = createRouter({
       name : 'semi-monthly',
       component : SemiMonthlyMainPage
     },
+      {
+      path : '/timekeeping/payroll-period/sg',
+      name : 'sg',
+      component : SGMainPage
+    },
     {
       path : '/user-settings/user-rights',
       name : 'user-rights',
@@ -90,6 +97,11 @@ const router = createRouter({
       path : '/timekeeping/manage-dtr-confi',
       name : 'manage-dtr-confi',
       component : DTRMainPageConfi
+    },
+    {
+      path : '/timekeeping/manage-dtr-sg',
+      name : 'manage-dtr-confi',
+      component : DTRMainPageSG
     },
 
     

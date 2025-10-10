@@ -1,11 +1,11 @@
 <template>
      <Toolbar>
         <template #start>
-            <Button icon="pi pi-calculator" @click="computeLogs" class="mr-2" severity="secondary" label="Compute" /> 
+            <Button v-if="authStore.user.edit_dtr=='Y'" icon="pi pi-calculator" @click="computeLogs" class="mr-2" severity="secondary" label="Compute" /> 
             <Button icon="pi pi-list" @click="showLogs" class="mr-2" severity="secondary" label="Show Logs" /> 
-            <Button icon="pi pi-download" @click="drawLogs" class="mr-2" severity="secondary" label="Draw Logs" /> 
-            <Button icon="pi pi-pen-to-square" @click="filloutLogout" class="mr-2" severity="secondary" label="Fill in Logout" /> 
-            <Button icon="pi pi-pen-to-square" @click="completeLog" class="mr-2" severity="secondary" label="Complete Logs" /> 
+            <Button v-if="authStore.user.edit_dtr=='Y'" icon="pi pi-download" @click="drawLogs" class="mr-2" severity="secondary" label="Draw Logs" /> 
+            <Button v-if="authStore.user.edit_dtr=='Y'" icon="pi pi-pen-to-square" @click="filloutLogout" class="mr-2" severity="secondary" label="Fill in Logout" /> 
+            <Button v-if="authStore.user.edit_dtr=='Y'" icon="pi pi-pen-to-square" @click="completeLog" class="mr-2" severity="secondary" label="Complete Logs" /> 
         </template>
         <template #center ></template>
         <template #end ></template>
@@ -24,7 +24,7 @@
           
         </Column>
         <Column header="Schedule" field="schedule_id" style="text-align: center;width:10rem;">
-            <template #editor="{ data, field }">
+            <template  v-if="authStore.user.edit_dtr=='Y'"  #editor="{ data, field }">
                 <Select style="width:8rem" v-model="data[field]" :options="sched_options" optionLabel="label" optionValue="id" placeholder="Select" ></Select>
             </template>
             <template #body="slotProps">
@@ -84,6 +84,10 @@
     import { useManageDTRStore } from '@/stores/manage-dtr';
     import { useToast } from 'primevue/usetoast';
     import { useConfirm } from 'primevue';
+
+    import { useAuthStore } from '@/stores/auth';
+
+    const authStore = useAuthStore();
 
     const confirm = useConfirm();
 
@@ -226,7 +230,7 @@
     const loading = ref(false);
 
     onMounted(async() => {
-        
+        // console.log(authStore.user.edit_dtr);
     });
 
     const setData = (data,sched) => {

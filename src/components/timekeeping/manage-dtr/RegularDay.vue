@@ -83,8 +83,11 @@
     import { useManageDTRStore } from '@/stores/manage-dtr';
     import { useToast } from 'primevue/usetoast';
     import { useConfirm } from 'primevue';
+    import { useAuthStore } from '@/stores/auth';
 
     const confirm = useConfirm();
+
+    const authStore = useAuthStore();
 
     const toast = useToast();
     const dtr_store = useManageDTRStore();
@@ -201,7 +204,7 @@
     const loading = ref(false);
 
     onMounted(async() => {
-        
+    
     });
 
     const setData = (data,sched) => {

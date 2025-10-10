@@ -21,7 +21,7 @@
                 <Button label="Save" @click="saveRights" icon="pi pi-save"></Button>
             </template>
         </Toolbar>
-        <DataTable v-model:selection="selectedModules" :value="modules">
+        <DataTable v-model:selection="selectedModules" :value="modules" dataKey="id" >
             <Column selectionMode="multiple" headerStyle="width: 3rem"></Column>    
             <Column header="Module" field="label"></Column>
         </DataTable>
@@ -47,10 +47,9 @@
     const modules = ref();
 
     const saveRights = async () => {
-        console.log(selectedModules.value,selectedUser.value);
+       
         await userStore.saveRights(selectedModules.value,selectedUser.value);
-
-        toast.add( { severity: 'success', summary: 'Success', detail: 'Access Rights saved successfully.', life: 3000 });
+        toast.add({ severity: 'success', summary: 'Success', detail: 'Access Rights saved successfully.', life: 3000 });
 
     };
 
@@ -67,7 +66,13 @@
     });
 
     const showRights = async (obj) => {
-        console.log(obj);
+        // console.log(obj); obj.id
+        let rights = await userStore.showRights(obj);
+
+        console.log(rights.value);
+
+        selectedModules.value = rights.value;
+
         selectedUser.value = obj;
         visible.value = true;
     };

@@ -10,6 +10,7 @@
             <TablePage ref="dtrTable" @reloadLogs="reloadLogs" ></TablePage>
         </div>
     </div>
+
 </template>
 
 <script setup>
@@ -17,11 +18,13 @@
     import EmployeeList from '@/components/common/EmployeeList.vue';
     import { useEmployeeStore } from '@/stores/employee';
     import DynamicList from '@/components/common/DynamicList.vue';
-    import { usePayrollPeriodStore } from '@/stores/payrollperiod';
+    // import { usePayrollPeriodStore } from '@/stores/payrollperiod';
+    import { usePayrollPeriodSGStore } from '@/stores/payrollperiod-sg';
+
     import TablePage from './TablePage.vue';
     import { useManageDTRStore } from '@/stores/manage-dtr';
 
-    const payrollperiod_store = usePayrollPeriodStore();
+    const payrollperiod_store = usePayrollPeriodSGStore();
 
     const payrollperiod = ref();
     const empList = ref();
@@ -39,14 +42,12 @@
     const dtrTable = ref();
 
     onMounted(async() => {
-        
         let periods = await payrollperiod_store.getList();
         payrollperiod.value = periods.value;
 
         payperiodList.value.setData(payrollperiod.value);
 
-        // let employees = await employee_store.getEmployeeList();
-        let employees = await employee_store.getEmployeeListByLevel(5);
+        let employees = await employee_store.getEmployeeListByLevel(6);
         empList.value.setNames(employees);
 
         active_employees.value = employees.value.active;

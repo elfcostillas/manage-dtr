@@ -87,6 +87,7 @@
     });
 
     const setData = async (data) => {
+        console.log(data);
         dtrData.value = data;
         
         // refRegularDay.value.setLoadingState(true);
@@ -115,6 +116,10 @@
 
             case 'fill-out' :
                 style = 'background-color:#FAA0A0;';
+            break;
+
+            case 'complete' :
+                style = 'background-color:#90D5FF;';
             break;
             
         }

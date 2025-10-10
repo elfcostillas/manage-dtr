@@ -6,10 +6,10 @@ axios.defaults.withXSRFToken = true;
 const api  = axios.create({
    
     // baseURL : 'http://172.17.56.65/support-group-api/'
-    // baseURL : 'http://172.17.42.108/manage-dtr-api/'
-    // baseURL : 'http://172.17.56.65/manage-dtr-api/'
+    baseURL : 'http://172.17.42.108/manage-dtr-api/'
+    // baseURL : 'http://172.17.56.93/manage-dtr-api/'
     // baseURL : 'http://172.17.56.111/manage-dtr-api/'
-    baseURL : 'http://localhost/manage-dtr-api/'
+    // baseURL : 'http://localhost/manage-dtr-api/'
     
 });
 
