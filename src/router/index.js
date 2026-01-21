@@ -100,7 +100,7 @@ const router = createRouter({
     },
     {
       path : '/timekeeping/manage-dtr-sg',
-      name : 'manage-dtr-confi',
+      name : 'manage-dtr-sg',
       component : DTRMainPageSG
     },
 
