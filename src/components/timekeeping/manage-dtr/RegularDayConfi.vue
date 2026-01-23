@@ -6,6 +6,7 @@
             <Button v-if="authStore.user.edit_dtr=='Y'" icon="pi pi-download" @click="drawLogs" class="mr-2" severity="secondary" label="Draw Logs" /> 
             <Button v-if="authStore.user.edit_dtr=='Y'" icon="pi pi-pen-to-square" @click="filloutLogout" class="mr-2" severity="secondary" label="Fill in Logout" /> 
             <Button v-if="authStore.user.edit_dtr=='Y'" icon="pi pi-pen-to-square" @click="completeLog" class="mr-2" severity="secondary" label="Complete Logs" /> 
+            <Button v-if="authStore.user.edit_dtr=='Y'" icon="pi pi-trash" @click="clearLog" class="mr-2" severity="secondary" label="Clear Generated Logs" /> 
         </template>
         <template #center ></template>
         <template #end ></template>
@@ -174,6 +175,30 @@
             },
             accept: async () => {
                 await dtr_store.completeLog();
+                emit('reloadLogs')
+
+            },
+            reject: () => {
+              
+            }
+        });
+    };
+
+    const clearLog = () => {
+        confirm.require({       
+            message: 'Are you sure you want to clear out generated Logs.',
+            header: 'Confirmation',
+            icon: 'pi pi-exclamation-triangle',
+            rejectProps: {
+                label: 'Cancel',
+                severity: 'secondary',
+                outlined: true
+            },
+            acceptProps: {
+                label: 'Proceed'
+            },
+            accept: async () => {
+                await dtr_store.clearLog();
                 emit('reloadLogs')
 
             },

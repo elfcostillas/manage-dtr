@@ -85,6 +85,21 @@ export const useManageDTRStore = defineStore("manageDTRStore", () => {
         return dtr_data;
     };
 
+    const clearLog = async () => {
+        let arrayData = {
+            period_id : selectedPeriod.value,
+            emp_id : selectedEmployee.value
+        };
+
+        try{
+            const { data } = await getFN(`api/timekeeping/manage-dtr-semi/clear-logs/${selectedPeriod.value}/${selectedEmployee.value}`,null);
+            dtr_data.value = data;
+        }catch(error){
+
+        }
+
+        return dtr_data;
+    };
 
     const computeLogs = async () => {
         let arrayData = {
@@ -138,6 +153,7 @@ export const useManageDTRStore = defineStore("manageDTRStore", () => {
         updateLog,
         getRawLogs,
         updateRawLog,
-        completeLog
+        completeLog,
+        clearLog
     };
 });

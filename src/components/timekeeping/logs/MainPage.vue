@@ -13,7 +13,7 @@
                 <DataTable :value="rawLogs" paginator :rows="9" :loading="loading" @row-edit-save="onRowEditSave"
                     v-model:editingRows="editingRows" editMode="row"
                     :rowStyle="fnBackGround" scrollable scrollHeight="50rem" 
-                    style="width: 48rem;"
+                    style="width: 60rem;"
                 >
                     <template #loading> Loading raw logs. Please wait. </template>
                     <Column style="width:8rem;max-width:8rem" header="Date" field="punch_date" >
@@ -23,6 +23,11 @@
                         </template>
                     </Column>
                     <Column style="min-width:8rem;max-width:8rem" header="Clock In" field="punch_time" ></Column>
+                    <Column style="min-width:8rem;max-width:8rem" header="Modified Clock In" field="new_punch_time" >
+                        <template #editor="{ data,field }">
+                            <InputText style="width:6rem"  v-model="data[field]" placeHolder="HH:mm" />
+                        </template>
+                    </Column>
                     <Column style="min-width:8rem;max-width:8rem" header="State" field="cstate" ></Column>
                     <Column style="min-width:8rem;max-width:8rem" header="New State" field="new_cstate" >
                         <template #editor="{ data, field }">
